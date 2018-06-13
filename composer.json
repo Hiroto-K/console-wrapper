@@ -1,0 +1,32 @@
+{
+    "name": "hiroto-k/console-wrapper",
+    "description": "Wrapper class of symfony/console",
+    "version": "0.1.0",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hiroto Kitazawa",
+            "email": "hiro.yo.yo1610@gmail.com",
+            "homepage": "https://hiroto-k.net/"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "symfony/console": "^4.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.1",
+        "friendsofphp/php-cs-fixer": "^2.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "HirotoK\\ConsoleWrapper\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HirotoK\\ConsoleWrapper\\Tests\\": "tests/"
+        }
+    }
+}
