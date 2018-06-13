@@ -12,6 +12,8 @@
 namespace HirotoK\ConsoleWrapper;
 
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class Command.
@@ -20,4 +22,31 @@ use Symfony\Component\Console\Command\Command as SymfonyCommand;
  */
 abstract class Command extends SymfonyCommand
 {
+    /**
+     * Command name.
+     *
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * Command description.
+     *
+     * @var string
+     */
+    protected $description;
+
+    /**
+     * InputInterface instance.
+     *
+     * @var \Symfony\Component\Console\Input\InputInterface
+     */
+    protected $input;
+
+    /**
+     * OutputInterface instance.
+     *
+     * @var \Symfony\Component\Console\Output\OutputInterface
+     */
+    protected $output;
 }
