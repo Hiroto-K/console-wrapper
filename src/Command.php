@@ -112,9 +112,11 @@ abstract class Command extends SymfonyCommand
 
     /**
      * Return all options.
+     *
      * @return array
      */
-    protected function options(){
+    protected function options()
+    {
         return $this->option();
     }
 
@@ -149,10 +151,12 @@ abstract class Command extends SymfonyCommand
     }
 
     /**
-     * Return all arguments
+     * Return all arguments.
+     *
      * @return array
      */
-    protected function arguments(){
+    protected function arguments()
+    {
         return $this->argument();
     }
 
@@ -182,7 +186,7 @@ abstract class Command extends SymfonyCommand
      */
     protected function writeln($messages, $options = 0)
     {
-        return $this->output->writeln($messages,$options);
+        return $this->output->writeln($messages, $options);
     }
 
     /**
