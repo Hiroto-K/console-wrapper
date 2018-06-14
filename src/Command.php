@@ -119,6 +119,20 @@ abstract class Command extends SymfonyCommand
     }
 
     /**
+     * Proxy method of InputInterface::hasOption.
+     *
+     * @see \Symfony\Component\Console\Input\InputInterface::hasOption
+     *
+     * @param string $name Option name
+     *
+     * @return bool
+     */
+    protected function hasOption($name)
+    {
+        return $this->input->hasOption($name);
+    }
+
+    /**
      * Get arguments.
      *
      * @param string|null $name argument name
@@ -132,20 +146,6 @@ abstract class Command extends SymfonyCommand
         }
 
         return $this->input->getArgument($name);
-    }
-
-    /**
-     * Proxy method of InputInterface::hasOption.
-     *
-     * @see \Symfony\Component\Console\Input\InputInterface::hasOption
-     *
-     * @param string $name Option name
-     *
-     * @return bool
-     */
-    protected function hasOption($name)
-    {
-        return $this->input->hasOption($name);
     }
 
     /**
