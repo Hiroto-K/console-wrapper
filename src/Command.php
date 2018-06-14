@@ -11,6 +11,7 @@
 
 namespace HirotoK\ConsoleWrapper;
 
+use HirotoK\ConsoleWrapper\Exception\LogicException;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -60,6 +61,7 @@ abstract class Command extends SymfonyCommand
      * Execute command.
      */
     protected function handle(){
+        throw new LogicException('You must override the handle() method.');
     }
 
     /**
