@@ -12,6 +12,7 @@ class CommandTest extends TestCase {
     public function testName(){
         $command = new class extends Command{
             protected $name = "test:name";
+            protected $description = "example";
         };
 
         $this->assertSame("test:name", $command->getName());
