@@ -10,20 +10,20 @@ use PHPUnit\Framework\TestCase;
 class CommandTest extends TestCase {
 
     public function testName(){
-        $class = new class extends Command{
+        $command = new class extends Command{
             protected $name = "test:name";
         };
 
-        $this->assertSame("test:name", $class->getName());
+        $this->assertSame("test:name", $command->getName());
     }
 
     public function testDescription(){
-        $class = new class extends Command{
+        $command = new class extends Command{
             protected $name = "example";
             protected $description = "This is a test description.";
         };
 
-        $this->assertSame("This is a test description.", $class->getDescription());
+        $this->assertSame("This is a test description.", $command->getDescription());
     }
 
 }
