@@ -196,4 +196,13 @@ abstract class Command extends SymfonyCommand
         $this->writeln("<question>{$message}</question>", $options);
     }
 
+    /**
+     * Writeln with error color style
+     * @param string $message
+     * @param int $options
+     */
+    protected function error($message, $options = 0){
+        $this->writeln("<error>{$message}</error>", $options);
+    }
+
 }
