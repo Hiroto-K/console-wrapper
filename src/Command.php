@@ -170,39 +170,46 @@ abstract class Command extends SymfonyCommand
     }
 
     /**
-     * Writeln with info color style
+     * Writeln with info color style.
+     *
      * @param string $message
      * @param int $options
      */
-    protected function info($message, $options = 0){
+    protected function info($message, $options = 0)
+    {
         $this->writeln("<info>{$message}</info>", $options);
     }
 
     /**
-     * Writeln with comment color style
+     * Writeln with comment color style.
+     *
      * @param string $message
      * @param int $options
      */
-    protected function comment($message, $options = 0){
+    protected function comment($message, $options = 0)
+    {
         $this->writeln("<comment>{$message}</comment>", $options);
     }
 
     /**
-     * Writeln with question color style
+     * Writeln with question color style.
+     *
      * @param string $message
      * @param int $options
      */
-    protected function question($message, $options = 0){
+    protected function question($message, $options = 0)
+    {
         $this->writeln("<question>{$message}</question>", $options);
     }
 
     /**
-     * Writeln with error color style
+     * Writeln with error color style.
+     *
      * @param string $message
      * @param int $options
      */
-    protected function error($message, $options = 0){
+    protected function error($message, $options = 0)
+    {
         $this->writeln("<error>{$message}</error>", $options);
     }
-
 }
