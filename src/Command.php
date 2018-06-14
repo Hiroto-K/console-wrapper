@@ -155,13 +155,17 @@ abstract class Command extends SymfonyCommand
     }
 
     /**
-     * Proxy method of OutputInterface::writeln
+     * Proxy method of OutputInterface::writeln.
+     *
      * @see \Symfony\Component\Console\Output\OutputInterface::writeln
+     *
      * @param string|iterable $messages
      * @param int $options
+     *
      * @return mixed
      */
-    protected function writeln($messages, $options = 0){
-        return $this->output->writeln($messages. $options);
+    protected function writeln($messages, $options = 0)
+    {
+        return $this->output->writeln($messages.$options);
     }
 }
