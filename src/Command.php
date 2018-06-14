@@ -51,6 +51,18 @@ abstract class Command extends SymfonyCommand
     protected $output;
 
     /**
+     * Configure command.
+     */
+    protected function setup(){
+    }
+
+    /**
+     * Execute command.
+     */
+    protected function handle(){
+    }
+
+    /**
      * Configures the command.
      */
     protected function configure()
