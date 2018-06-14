@@ -166,7 +166,7 @@ abstract class Command extends SymfonyCommand
      */
     protected function writeln($messages, $options = 0)
     {
-        return $this->output->writeln($messages.$options);
+        return $this->output->writeln($messages,$options);
     }
 
     /**
