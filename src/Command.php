@@ -153,4 +153,15 @@ abstract class Command extends SymfonyCommand
     {
         return $this->input->hasArgument($name);
     }
+
+    /**
+     * Proxy method of OutputInterface::writeln
+     * @see \Symfony\Component\Console\Output\OutputInterface::writeln
+     * @param string|iterable $messages
+     * @param int $options
+     * @return mixed
+     */
+    protected function writeln($messages, $options = 0){
+        return $this->output->writeln($messages. $options);
+    }
 }
