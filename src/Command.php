@@ -187,4 +187,13 @@ abstract class Command extends SymfonyCommand
         $this->writeln("<comment>{$message}</comment>", $options);
     }
 
+    /**
+     * Writeln with question color style
+     * @param string $message
+     * @param int $options
+     */
+    protected function question($message, $options = 0){
+        $this->writeln("<question>{$message}</question>", $options);
+    }
+
 }
