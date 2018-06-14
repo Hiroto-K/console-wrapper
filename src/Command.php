@@ -53,7 +53,9 @@ abstract class Command extends SymfonyCommand
     /**
      * Configures the command.
      */
-    protected function configure(){}
+    protected function configure()
+    {
+    }
 
     /**
      * Execute the command.
