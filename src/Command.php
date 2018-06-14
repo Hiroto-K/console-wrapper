@@ -149,6 +149,14 @@ abstract class Command extends SymfonyCommand
     }
 
     /**
+     * Return all arguments
+     * @return array
+     */
+    protected function arguments(){
+        return $this->argument();
+    }
+
+    /**
      * Proxy method of InputInterface::hasArgument.
      *
      * @see \Symfony\Component\Console\Input\InputInterface::hasArgument
