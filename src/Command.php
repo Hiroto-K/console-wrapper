@@ -84,4 +84,28 @@ abstract class Command extends SymfonyCommand
         $this->input = $input;
         $this->output = $output;
     }
+
+    /**
+     * Get options
+     * @param string|null $name Option name.
+     * @return array|mixed Return all options if $name is null.
+     */
+    protected function option($name = null){
+        if (is_null($name)) {
+            return $this->input->getOptions();
+        }
+        return $this->input->getOption($name);
+    }
+
+    /**
+     * Get arguments
+     * @param string|null $name Argument name.
+     * @return array|mixed Return all arguments if $name is null.
+     */
+    protected function argument($name = null){
+        if (is_null($name)) {
+            return $this->input->getArguments();
+        }
+        return $this->input->getArgument($name);
+    }
 }
