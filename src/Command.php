@@ -111,6 +111,14 @@ abstract class Command extends SymfonyCommand
     }
 
     /**
+     * Return all options.
+     * @return array
+     */
+    protected function options(){
+        return $this->option();
+    }
+
+    /**
      * Get arguments.
      *
      * @param string|null $name argument name
