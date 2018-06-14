@@ -177,4 +177,14 @@ abstract class Command extends SymfonyCommand
     protected function info($message, $options = 0){
         $this->writeln("<info>{$message}</info>", $options);
     }
+
+    /**
+     * Writeln with comment color style
+     * @param string $message
+     * @param int $options
+     */
+    protected function comment($message, $options = 0){
+        $this->writeln("<comment>{$message}</comment>", $options);
+    }
+
 }
