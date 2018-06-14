@@ -54,13 +54,15 @@ abstract class Command extends SymfonyCommand
     /**
      * Configure command.
      */
-    protected function setup(){
+    protected function setup()
+    {
     }
 
     /**
      * Execute command.
      */
-    protected function handle(){
+    protected function handle()
+    {
         throw new LogicException('You must override the handle() method.');
     }
 
@@ -91,26 +93,34 @@ abstract class Command extends SymfonyCommand
     }
 
     /**
-     * Get options
-     * @param string|null $name Option name.
-     * @return array|mixed Return all options if $name is null.
+     * Get options.
+     *
+     * @param string|null $name option name
+     *
+     * @return array|mixed return all options if $name is null
      */
-    protected function option($name = null){
+    protected function option($name = null)
+    {
         if (is_null($name)) {
             return $this->input->getOptions();
         }
+
         return $this->input->getOption($name);
     }
 
     /**
-     * Get arguments
-     * @param string|null $name Argument name.
-     * @return array|mixed Return all arguments if $name is null.
+     * Get arguments.
+     *
+     * @param string|null $name argument name
+     *
+     * @return array|mixed return all arguments if $name is null
      */
-    protected function argument($name = null){
+    protected function argument($name = null)
+    {
         if (is_null($name)) {
             return $this->input->getArguments();
         }
+
         return $this->input->getArgument($name);
     }
 }
