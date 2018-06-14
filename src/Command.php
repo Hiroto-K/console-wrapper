@@ -168,4 +168,13 @@ abstract class Command extends SymfonyCommand
     {
         return $this->output->writeln($messages.$options);
     }
+
+    /**
+     * Writeln with info color style
+     * @param string $message
+     * @param int $options
+     */
+    protected function info($message, $options = 0){
+        $this->writeln("<info>{$message}</info>", $options);
+    }
 }
