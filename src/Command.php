@@ -82,7 +82,8 @@ abstract class Command extends SymfonyCommand
 
         $this
             ->setName($this->name)
-            ->setDescription($this->description);
+            ->setDescription($this->description)
+            ->setHidden($this->hidden);
 
         foreach ($this->commandArguments() as $arguments) {
             call_user_func_array([$this, 'addArgument'], $arguments);
