@@ -102,46 +102,6 @@ abstract class Command extends SymfonyCommand
     }
 
     /**
-     * Get options.
-     *
-     * @param string|null $name option name
-     *
-     * @return array|mixed return all options if $name is null
-     */
-    protected function option($name = null)
-    {
-        if (is_null($name)) {
-            return $this->input->getOptions();
-        }
-
-        return $this->input->getOption($name);
-    }
-
-    /**
-     * Return all options.
-     *
-     * @return array
-     */
-    protected function options()
-    {
-        return $this->option();
-    }
-
-    /**
-     * Proxy method of InputInterface::hasOption.
-     *
-     * @see \Symfony\Component\Console\Input\InputInterface::hasOption
-     *
-     * @param string $name Option name
-     *
-     * @return bool
-     */
-    protected function hasOption($name)
-    {
-        return $this->input->hasOption($name);
-    }
-
-    /**
      * Get arguments.
      *
      * @param string|null $name argument name
@@ -179,6 +139,46 @@ abstract class Command extends SymfonyCommand
     protected function hasArgument($name)
     {
         return $this->input->hasArgument($name);
+    }
+
+    /**
+     * Get options.
+     *
+     * @param string|null $name option name
+     *
+     * @return array|mixed return all options if $name is null
+     */
+    protected function option($name = null)
+    {
+        if (is_null($name)) {
+            return $this->input->getOptions();
+        }
+
+        return $this->input->getOption($name);
+    }
+
+    /**
+     * Return all options.
+     *
+     * @return array
+     */
+    protected function options()
+    {
+        return $this->option();
+    }
+
+    /**
+     * Proxy method of InputInterface::hasOption.
+     *
+     * @see \Symfony\Component\Console\Input\InputInterface::hasOption
+     *
+     * @param string $name Option name
+     *
+     * @return bool
+     */
+    protected function hasOption($name)
+    {
+        return $this->input->hasOption($name);
     }
 
     /**
@@ -241,23 +241,23 @@ abstract class Command extends SymfonyCommand
     }
 
     /**
-     * Set options.
-     * If using options, override this method.
-     *
-     * @return array[]
-     */
-    protected function commandOptions()
-    {
-        return [];
-    }
-
-    /**
      * Set arguments.
      * If using arguments, override this method.
      *
      * @return array[]
      */
     protected function commandArguments()
+    {
+        return [];
+    }
+
+    /**
+     * Set options.
+     * If using options, override this method.
+     *
+     * @return array[]
+     */
+    protected function commandOptions()
     {
         return [];
     }
