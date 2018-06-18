@@ -232,4 +232,22 @@ abstract class Command extends SymfonyCommand
     {
         $this->writeln("<error>{$message}</error>", $options);
     }
+
+    /**
+     * Set options.
+     * If using options, override this method.
+     * @return array[]
+     */
+    protected function commandOptions(){
+        return [];
+    }
+
+    /**
+     * Set arguments.
+     * If using arguments, override this method.
+     * @return array[]
+     */
+    protected function commandArguments(){
+        return [];
+    }
 }
