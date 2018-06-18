@@ -236,18 +236,22 @@ abstract class Command extends SymfonyCommand
     /**
      * Set options.
      * If using options, override this method.
+     *
      * @return array[]
      */
-    protected function commandOptions(){
+    protected function commandOptions()
+    {
         return [];
     }
 
     /**
      * Set arguments.
      * If using arguments, override this method.
+     *
      * @return array[]
      */
-    protected function commandArguments(){
+    protected function commandArguments()
+    {
         return [];
     }
 }
