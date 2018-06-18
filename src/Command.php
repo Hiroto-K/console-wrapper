@@ -38,6 +38,13 @@ abstract class Command extends SymfonyCommand
     protected $description;
 
     /**
+     * Whether or not the command should be hidden from the list of commands.
+     *
+     * @var bool
+     */
+    protected $hidden = false;
+
+    /**
      * InputInterface instance.
      *
      * @var \Symfony\Component\Console\Input\InputInterface
