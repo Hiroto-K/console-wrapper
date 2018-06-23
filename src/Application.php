@@ -35,6 +35,7 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
      * {@inheritdoc}
      *
      * @param \Symfony\Component\Console\Command\Command $command
+     *
      * @return \Symfony\Component\Console\Command\Command|null
      */
     public function add(SymfonyCommand $command)

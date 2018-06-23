@@ -252,10 +252,12 @@ abstract class Command extends SymfonyCommand
     }
 
     /**
-     * Return logger instance
+     * Return logger instance.
+     *
      * @return \Psr\Log\LoggerInterface
      */
-    protected function logger(){
+    protected function logger()
+    {
         return $this->logger;
     }
 
