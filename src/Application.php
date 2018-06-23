@@ -17,6 +17,7 @@ use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
 use Symfony\Component\Console\Application as SymfonyApplication;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class Application.
@@ -61,6 +62,24 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
             $command = new $class();
             $this->add($command);
         }
+    }
+
+    /**
+     * Gets the default input definition.
+     *
+     * @return \Symfony\Component\Console\Input\InputDefinition
+     */
+    protected function getDefaultInputDefinition()
+    {
+        $definition = parent::getDefaultInputDefinition();
+
+        $options = $this->globalOptions();
+        foreach ($options as $option) {
+            $inputOption = new InputOption(...$option);
+            $definition->addOption($inputOption);
+        }
+
+        return $definition;
     }
 
     /**
