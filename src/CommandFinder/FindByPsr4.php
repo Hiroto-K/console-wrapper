@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace HirotoK\ConsoleWrapper\Loader;
+namespace HirotoK\ConsoleWrapper\CommandFinder;
+
 use HirotoK\StringBuilder\StringBuilder;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
 /**
- * Class LoadByPsr4.
- *
- * @package HirotoK\ConsoleWrapper\Loader
+ * Class FindByPsr4
+ * @package HirotoK\ConsoleWrapper\CommandFinder
  */
-class LoadByPsr4
+class FindByPsr4
 {
     /**
      * Namespace prefix.
