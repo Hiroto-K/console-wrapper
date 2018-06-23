@@ -11,7 +11,8 @@
 
 namespace HirotoK\ConsoleWrapper;
 
-use Psr\Log\LoggerInterface;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
 use Symfony\Component\Console\Application as SymfonyApplication;
 
@@ -20,14 +21,9 @@ use Symfony\Component\Console\Application as SymfonyApplication;
  *
  * @package HirotoK\ConsoleWrapper
  */
-class Application extends SymfonyApplication
+class Application extends SymfonyApplication implements LoggerAwareInterface
 {
-    /**
-     * Logger instance.
-     *
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected $logger;
+    use LoggerAwareTrait;
 
     /**
      * Get logger instance.
@@ -41,15 +37,5 @@ class Application extends SymfonyApplication
         }
 
         return new NullLogger;
-    }
-
-    /**
-     * Set logger instance.
-     *
-     * @param \Psr\Log\LoggerInterface $logger
-     */
-    public function setLogger(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
     }
 }
