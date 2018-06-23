@@ -12,6 +12,7 @@
 namespace HirotoK\ConsoleWrapper;
 
 use Symfony\Component\Console\Application as SymfonyApplication;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class Application.
@@ -20,4 +21,26 @@ use Symfony\Component\Console\Application as SymfonyApplication;
  */
 class Application extends SymfonyApplication
 {
+
+    /**
+     * Logger instance
+     * @var \Psr\Log\LoggerInterface
+     */
+    protected $logger;
+
+    /**
+     * Get logger instance
+     * @return \Psr\Log\LoggerInterface
+     */
+    public function logger(){
+        return $this->logger;
+    }
+
+    /**
+     * Set logger instance
+     * @param \Psr\Log\LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger){
+        $this->logger = $logger;
+    }
 }
