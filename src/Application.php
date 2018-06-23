@@ -80,4 +80,14 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
 
         return $this->nullLogger;
     }
+
+    /**
+     * Set global options.
+     * If set global option, override this method
+     *
+     * @return array[]
+     */
+    public function globalOptions(){
+        return [];
+    }
 }
