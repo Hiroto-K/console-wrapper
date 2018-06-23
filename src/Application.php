@@ -102,11 +102,12 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
 
     /**
      * Set global options.
-     * If set global option, override this method
+     * If set global option, override this method.
      *
      * @return array[]
      */
-    public function globalOptions(){
+    public function globalOptions()
+    {
         return [];
     }
 }
