@@ -41,7 +41,7 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
             return $this->logger;
         }
 
-        if (!isset($this->nullLogger)){
+        if (!isset($this->nullLogger)) {
             $this->nullLogger = new NullLogger();
         }
 
