@@ -16,7 +16,8 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
 /**
- * Class FindByPsr4
+ * Class FindByPsr4.
+ *
  * @package HirotoK\ConsoleWrapper\CommandFinder
  */
 class FindByPsr4

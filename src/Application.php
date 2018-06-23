@@ -49,14 +49,16 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
     }
 
     /**
-     * Load commands by psr4
+     * Load commands by psr4.
+     *
      * @param string $nameSpacePrefix
      * @param string $targetDir
      */
-    public function loadByPsr4($nameSpacePrefix, $targetDir){
+    public function loadByPsr4($nameSpacePrefix, $targetDir)
+    {
         $finder = new FindByPsr4($nameSpacePrefix, $targetDir);
         foreach ($finder->getClasses() as $class) {
-            $command = new $class;
+            $command = new $class();
             $this->add($command);
         }
     }
