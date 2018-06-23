@@ -40,4 +40,14 @@ class CommandTest extends TestCase
 
         $this->assertSame('This is a test description.', $command->getDescription());
     }
+
+    public function testHidden()
+    {
+        $command = new class() extends Command {
+            protected $name = 'example';
+            protected $hidden = true;
+        };
+
+        $this->assertTrue($command->isHidden());
+    }
 }
