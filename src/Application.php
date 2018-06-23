@@ -36,6 +36,6 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
             return $this->logger;
         }
 
-        return new NullLogger;
+        return new NullLogger();
     }
 }
