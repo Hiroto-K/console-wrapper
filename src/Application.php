@@ -11,6 +11,7 @@
 
 namespace HirotoK\ConsoleWrapper;
 
+use HirotoK\ConsoleWrapper\CommandFinder\FindByPsr4;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
@@ -45,6 +46,19 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
         }
 
         return parent::add($command);
+    }
+
+    /**
+     * Load commands by psr4
+     * @param string $nameSpacePrefix
+     * @param string $targetDir
+     */
+    public function loadByPsr4($nameSpacePrefix, $targetDir){
+        $finder = new FindByPsr4($nameSpacePrefix, $targetDir);
+        foreach ($finder->getClasses() as $class) {
+            $command = new $class;
+            $this->add($command);
+        }
     }
 
     /**
