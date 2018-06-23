@@ -12,6 +12,7 @@
 namespace HirotoK\ConsoleWrapper;
 
 use HirotoK\ConsoleWrapper\Exception\LogicException;
+use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,6 +24,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 abstract class Command extends SymfonyCommand
 {
+    use LoggerAwareTrait;
+
     /**
      * Command name.
      *
