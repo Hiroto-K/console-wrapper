@@ -1,5 +1,8 @@
 # console-wrapper
 
+[![Build status](https://img.shields.io/travis/Hiroto-K/console-wrapper/master.svg?style=flat-square)](https://travis-ci.org/Hiroto-K/console-wrapper)
+[![License](https://img.shields.io/github/license/Hiroto-K/console-wrapper.svg?style=flat-square)](https://github.com/Hiroto-K/console-wrapper/blob/master/LICENSE)
+
 Wrapper class of symfony/console
 
 Example command class.
