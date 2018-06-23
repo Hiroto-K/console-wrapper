@@ -12,6 +12,7 @@
 namespace HirotoK\ConsoleWrapper;
 
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Symfony\Component\Console\Application as SymfonyApplication;
 
 /**
@@ -35,7 +36,11 @@ class Application extends SymfonyApplication
      */
     public function logger()
     {
-        return $this->logger;
+        if ($this->logger) {
+            return $this->logger;
+        }
+
+        return new NullLogger;
     }
 
     /**
