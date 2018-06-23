@@ -15,6 +15,7 @@ use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
 use Symfony\Component\Console\Application as SymfonyApplication;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
 
 /**
  * Class Application.
@@ -29,6 +30,21 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
      * @var \Psr\Log\NullLogger
      */
     protected $nullLogger;
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param \Symfony\Component\Console\Command\Command $command
+     * @return \Symfony\Component\Console\Command\Command|null
+     */
+    public function add(SymfonyCommand $command)
+    {
+        if ($command instanceof Command) {
+            $command->setLogger($this->logger());
+        }
+
+        return parent::add($command);
+    }
 
     /**
      * Get logger instance.
