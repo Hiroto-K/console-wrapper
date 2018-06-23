@@ -119,7 +119,7 @@ class HogeFooCommand extends Command
 in Application
 ```php
 <?php
-use Symfony\Component\Console\Application;
+use HirotoK\ConsoleWrapper\Application;
 
 $application = new Application();
 $application->add(new HogeFooCommand());
