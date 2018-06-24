@@ -255,16 +255,6 @@ abstract class Command extends SymfonyCommand
     }
 
     /**
-     * Return logger instance.
-     *
-     * @return \Psr\Log\LoggerInterface
-     */
-    protected function logger()
-    {
-        return $this->logger;
-    }
-
-    /**
      * Call other command.
      *
      * @param string $commandName Command name
@@ -315,6 +305,16 @@ abstract class Command extends SymfonyCommand
             ->setRows($rows);
 
         return $table;
+    }
+
+    /**
+     * Return logger instance.
+     *
+     * @return \Psr\Log\LoggerInterface
+     */
+    protected function logger()
+    {
+        return $this->logger;
     }
 
     /**
