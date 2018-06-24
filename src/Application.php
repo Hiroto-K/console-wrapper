@@ -103,13 +103,14 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
 
     /**
      * Sets a logger.
+     *
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
 
-        foreach ($this->all() as $name => $command){
+        foreach ($this->all() as $name => $command) {
             if ($command instanceof Command) {
                 $command->setLogger($this->logger);
             }
