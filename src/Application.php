@@ -106,7 +106,7 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
      *
      * @return array[]
      */
-    public function globalOptions()
+    protected function globalOptions()
     {
         return [];
     }
