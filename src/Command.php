@@ -264,14 +264,18 @@ abstract class Command extends SymfonyCommand
 
     /**
      * Call other command.
+     *
      * @param string $command Command name
      * @param array $parameters Command parameters
+     *
      * @return int Exit code
+     *
      * @throws \Exception
      */
-    protected function callCommand($command, $parameters = []){
+    protected function callCommand($command, $parameters = [])
+    {
         $findCommand = $this->getApplication()->find($command);
-        $parameters = array_merge($parameters, compact("command"));
+        $parameters = array_merge($parameters, compact('command'));
         $arrayInput = new ArrayInput($parameters);
 
         return $findCommand->run($arrayInput, $this->output);
