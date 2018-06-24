@@ -263,6 +263,7 @@ abstract class Command extends SymfonyCommand
     }
 
     /**
+     * Call other command.
      * @param string $command Command name
      * @param array $parameters Command parameters
      * @return int Exit code
