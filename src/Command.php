@@ -14,6 +14,7 @@ namespace HirotoK\ConsoleWrapper;
 use HirotoK\ConsoleWrapper\Exception\LogicException;
 use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -275,10 +276,28 @@ abstract class Command extends SymfonyCommand
     protected function callCommand($commandName, $parameters = [])
     {
         $command = $this->getApplication()->find($commandName);
-        $parameters = array_merge($parameters, ["command" => $commandName]);
+        $parameters = array_merge($parameters, ['command' => $commandName]);
         $arrayInput = new ArrayInput($parameters);
 
         return $command->run($arrayInput, $this->output);
+    }
+
+    /**
+     * Create table.
+     *
+     * @param array $headers
+     * @param array $rows
+     *
+     * @return \Symfony\Component\Console\Helper\Table
+     */
+    protected function table($headers, $rows)
+    {
+        $table = new Table($this->output);
+        $table
+            ->setHeaders($headers)
+            ->setRows($rows);
+
+        return $table;
     }
 
     /**
