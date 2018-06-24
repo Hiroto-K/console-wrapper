@@ -14,6 +14,7 @@ namespace HirotoK\ConsoleWrapper;
 use HirotoK\ConsoleWrapper\CommandFinder\FindByPsr4;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
+use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\Console\Application as SymfonyApplication;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
@@ -98,6 +99,21 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
         }
 
         return $this->nullLogger;
+    }
+
+    /**
+     * Sets a logger.
+     * @param \Psr\Log\LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+
+        foreach ($this->all() as $name => $command){
+            if ($command instanceof Command) {
+                $command->setLogger($this->logger);
+            }
+        }
     }
 
     /**
