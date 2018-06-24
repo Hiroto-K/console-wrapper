@@ -18,6 +18,7 @@ use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 /**
  * Class Command.
@@ -280,6 +281,22 @@ abstract class Command extends SymfonyCommand
         $arrayInput = new ArrayInput($parameters);
 
         return $command->run($arrayInput, $this->output);
+    }
+
+    /**
+     * Confirm the question.
+     *
+     * @param string $question Question content
+     * @param bool $default Default return value
+     *
+     * @return bool
+     */
+    protected function confirm($question, $default = true)
+    {
+        $helper = $this->getHelper('question');
+        $question = new ConfirmationQuestion($question, $default);
+
+        return $helper->ask($this->input, $this->output, $question);
     }
 
     /**
