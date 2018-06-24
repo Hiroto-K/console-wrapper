@@ -66,24 +66,6 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
     }
 
     /**
-     * Gets the default input definition.
-     *
-     * @return \Symfony\Component\Console\Input\InputDefinition
-     */
-    protected function getDefaultInputDefinition()
-    {
-        $definition = parent::getDefaultInputDefinition();
-
-        $options = $this->globalOptions();
-        foreach ($options as $option) {
-            $inputOption = new InputOption(...$option);
-            $definition->addOption($inputOption);
-        }
-
-        return $definition;
-    }
-
-    /**
      * Get logger instance.
      *
      * @return \Psr\Log\LoggerInterface
@@ -115,6 +97,24 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
                 $command->setLogger($this->logger);
             }
         }
+    }
+
+    /**
+     * Gets the default input definition.
+     *
+     * @return \Symfony\Component\Console\Input\InputDefinition
+     */
+    protected function getDefaultInputDefinition()
+    {
+        $definition = parent::getDefaultInputDefinition();
+
+        $options = $this->globalOptions();
+        foreach ($options as $option) {
+            $inputOption = new InputOption(...$option);
+            $definition->addOption($inputOption);
+        }
+
+        return $definition;
     }
 
     /**
