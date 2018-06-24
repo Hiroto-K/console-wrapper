@@ -14,6 +14,7 @@ namespace HirotoK\ConsoleWrapper;
 use HirotoK\ConsoleWrapper\Exception\LogicException;
 use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -259,6 +260,20 @@ abstract class Command extends SymfonyCommand
     protected function logger()
     {
         return $this->logger;
+    }
+
+    /**
+     * @param string $command Command name
+     * @param array $parameters Command parameters
+     * @return int Exit code
+     * @throws \Exception
+     */
+    protected function callCommand($command, $parameters = []){
+        $findCommand = $this->getApplication()->find($command);
+        $parameters = array_merge($parameters, compact("command"));
+        $arrayInput = new ArrayInput($parameters);
+
+        return $findCommand->run($arrayInput, $this->output);
     }
 
     /**
