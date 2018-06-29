@@ -9,11 +9,14 @@ Wrapper class of symfony/console
 
 ``composer require hiroto-k/console-wrapper:^1.0``
 
-## Tutorial
+## Examples
 
-Example command class.
+### Command class
+
 ```php
 <?php
+
+namespace Example\Commands;
 
 use HirotoK\ConsoleWrapper\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -61,6 +64,7 @@ class HogeFooCommand extends Command
         $this->question('question style');
         $this->error('error style');
 
+
         // Get all arguments.
         $allArguments = $this->arguments();
 
@@ -71,6 +75,7 @@ class HogeFooCommand extends Command
         // Check argument exists?
         $hasFamilyName = $this->hasArgument('family-name');
 
+
         // Get all options.
         $allOptions = $this->options();
 
@@ -79,9 +84,18 @@ class HogeFooCommand extends Command
 
         // Check option exists?
         $hasGreeting = $this->hasOption('greeting');
+        
+        
+        // Using logger.
+        // If logger instance not set in application, using \Psr\Log\NullLogger
+        $this->logger();
+
 
         // Example
         if ($greeting) {
+            $this->logger()->info("FirstName : {$firstName}");
+            $this->logger()->info("FamilyName : {$familyName}");
+
             $this->comment(
                 sprintf(
                     'Hello, %s %s',
@@ -93,45 +107,105 @@ class HogeFooCommand extends Command
     }
 
     /**
-     * Set arguments.
+     * Define command arguments.
      *
      * @see \Symfony\Component\Console\Command\Command::addArgument
      *
-     * @return array[]
+     * @return array
      */
     protected function commandArguments()
     {
         return [
-            // $name, $mode = null, $description = '', $default = null
+            // [$name, $mode = null, $description = '', $default = null]
             ['first-name', InputArgument::REQUIRED, 'Your first name (required)'],
             ['family-name', InputArgument::OPTIONAL, 'Your family name (optional)'],
         ];
     }
 
     /**
-     * Set options.
+     * Define command options.
      *
      * @see \Symfony\Component\Console\Command\Command::addOption
      *
-     * @return array[]
+     * @return array
      */
     protected function commandOptions()
     {
         return [
-            // $name, $shortcut = null, $mode = null, $description = '', $default = null
+            // [$name, $shortcut = null, $mode = null, $description = '', $default = null]
             ['greeting', 'g', InputOption::VALUE_NONE, 'Output greeting'],
         ];
     }
 }
 ```
 
-in Application
+### Application class
+
 ```php
 <?php
-use HirotoK\ConsoleWrapper\Application;
+
+namespace Example;
+
+use HirotoK\ConsoleWrapper\Application as WrapperApplication;
+use Symfony\Component\Console\Input\InputOption;
+
+class Application extends WrapperApplication
+{
+    /**
+     * Override default logger instance.
+     * Default logger class is \Psr\Log\NullLogger
+     * Return instance must be implement the \Psr\Log\LoggerInterface
+     * 
+     * @return \Psr\Log\LoggerInterface
+     */
+    protected function createDefaultLogger()
+    {
+        return new Logger();
+    }
+
+    /**
+     * Define global command options.
+     *  
+     * @return array
+     */
+    protected function globalOptions()
+    {
+        return [
+            // [$name, $shortcut = null, $mode = null, $description = '', $default = null]
+            ['config', 'c', InputOption::VALUE_REQUIRED, 'Set config file', "path/to/default"],
+        ];
+    }
+}
+```
+
+### Execute file
+
+```php
+<?php
+
+use Example\Application;
+use Example\Commands\HogeFooCommand;
 
 $application = new Application();
+
+// Add command.
 $application->add(new HogeFooCommand());
+
+/**
+ * Auto load commands by PSR-4.
+ * 
+ * loadByPsr4(namespace, directory)
+ */
+$application->loadByPsr4("\Example\Commands", realpath(__DIR__.'/src/Commands'));
+
+/**
+ * Using logger.
+ * Logger instance must be implement the \Psr\Log\LoggerInterface
+ * Logger instance is auto set to command classes.
+ */
+$application->setLogger($logger);
+
+// Start application.
 $application->run();
 ```
 
