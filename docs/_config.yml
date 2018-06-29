@@ -1,0 +1,9 @@
+theme: jekyll-theme-slate
+
+lang : ja-JP
+title: console-wrapper
+description: "Wrapper class of symfony/console."
+google_analytics: UA-73752623-2
+
+plugins:
+  - jemoji
