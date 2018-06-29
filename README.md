@@ -5,6 +5,12 @@
 
 Wrapper class of symfony/console
 
+## Install
+
+``composer require hiroto-k/console-wrapper:^1.0``
+
+## Tutorial
+
 Example command class.
 ```php
 <?php
