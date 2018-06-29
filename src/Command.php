@@ -321,7 +321,7 @@ abstract class Command extends SymfonyCommand
      * Set arguments.
      * If using arguments, override this method.
      *
-     * @return array[]
+     * @return array
      */
     protected function commandArguments()
     {
@@ -332,7 +332,7 @@ abstract class Command extends SymfonyCommand
      * Set options.
      * If using options, override this method.
      *
-     * @return array[]
+     * @return array
      */
     protected function commandOptions()
     {
