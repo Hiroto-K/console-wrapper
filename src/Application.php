@@ -101,11 +101,13 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
     }
 
     /**
-     * Create null logger instance
+     * Create null logger instance.
+     *
      * @return \Psr\Log\LoggerInterface
      */
-    protected function createNullLogger(){
-        return new NullLogger;
+    protected function createNullLogger()
+    {
+        return new NullLogger();
     }
 
     /**
