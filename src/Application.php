@@ -77,7 +77,7 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
         }
 
         if (!isset($this->nullLogger)) {
-            $this->nullLogger = new NullLogger();
+            $this->nullLogger = $this->createNullLogger();
         }
 
         return $this->nullLogger;
@@ -97,6 +97,14 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
                 $command->setLogger($this->logger);
             }
         }
+    }
+
+    /**
+     * Create null logger instance
+     * @return \Psr\Log\LoggerInterface
+     */
+    protected function createNullLogger(){
+        return new NullLogger;
     }
 
     /**
