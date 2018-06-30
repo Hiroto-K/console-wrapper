@@ -175,7 +175,7 @@ $application->add(new HogeFooCommand());
 $application->run();
 ```
 
-### Auto load commands by PSR-4
+### Auto add commands by PSR-4
 
 If project using PSR-4, auto load all commands by ``loadByPsr4`` method.
 
@@ -248,9 +248,94 @@ class Application extends WrapperApplication
 If using logger instance in ``setup`` method, **must be sets the logger instance before commands add**.
 
 ```php
+// Register logger instance
 $application->setLogger($logger);
 
+// Add commands
 $application->add(new HogeFooCommand());
+$application->loadByPsr4("\Example\Commands", realpath(__DIR__.'/src/Commands'));
+```
+
+### Confirm question
+
+Simple confirmation. Default returns ``true``.
+
+```php
+protected function handle()
+{
+    if ($this->confirm('continue ? (y/n) ')) {
+        // If enter y
+    }
+}
+```
+
+sets default value
+
+```php
+protected function handle()
+{
+    if ($this->confirm('continue ? (y/n) ', false)) {
+        // If enter y
+    }
+}
+```
+
+### Call other commands
+
+Call other command in command class.
+
+```php
+protected function handle()
+{
+    // Call "hoge:ex" command
+    $this->callCommand('hoge:ex');
+}
+```
+
+with parameters
+
+```php
+protected function handle()
+{
+    // Call "hoge:ex" command, with name parameter
+    $this->callCommand('hoge:ex', ['name' => 'example']);
+}
+```
+
+### Render tables
+
+```php
+protected function handle()
+{
+    $headers = ['name', 'location'];
+    $rows = [
+        ['Hoge', 'jp'],
+        ['Foo', 'us'],
+    ];
+
+    $this
+        ->table($headers, $rows)
+        ->render();
+}
+```
+
+
+```text
++------+----------+
+| name | location |
++------+----------+
+| Hoge | jp       |
+| Foo  | us       |
++------+----------+
+```
+
+customize tables, place see the ``\Symfony\Component\Console\Helper\Table`` class.
+
+```php
+$this
+    ->table($headers, $rows)
+    ->setColumnWidth(0, 10)
+    ->render();
 ```
 
 ## License
