@@ -11,7 +11,7 @@
 
 namespace HirotoK\ConsoleWrapper\Tests;
 
-use HirotoK\ConsoleWrapper\Command;
+use HirotoK\ConsoleWrapper\Tests\Examples\ExampleCommand;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,30 +23,20 @@ class CommandTest extends TestCase
 {
     public function testName()
     {
-        $command = new class() extends Command {
-            protected $name = 'test:name';
-            protected $description = 'example';
-        };
-
-        $this->assertSame('test:name', $command->getName());
+        $command = new ExampleCommand();
+        $this->assertSame('example:command', $command->getName());
     }
 
     public function testDescription()
     {
-        $command = new class() extends Command {
-            protected $name = 'example';
-            protected $description = 'This is a test description.';
-        };
+        $command = new ExampleCommand();
 
-        $this->assertSame('This is a test description.', $command->getDescription());
+        $this->assertSame('This is a test description', $command->getDescription());
     }
 
     public function testHidden()
     {
-        $command = new class() extends Command {
-            protected $name = 'example';
-            protected $hidden = true;
-        };
+        $command = new ExampleCommand();
 
         $this->assertTrue($command->isHidden());
     }
