@@ -84,18 +84,10 @@ class HogeFooCommand extends Command
 
         // Check option exists?
         $hasGreeting = $this->hasOption('greeting');
-        
-        
-        // Using logger.
-        // If logger instance not set in application, using \Psr\Log\NullLogger
-        $this->logger();
 
 
         // Example
         if ($greeting) {
-            $this->logger()->info("FirstName : {$firstName}");
-            $this->logger()->info("FamilyName : {$familyName}");
-
             $this->comment(
                 sprintf(
                     'Hello, %s %s',
@@ -152,18 +144,6 @@ use Symfony\Component\Console\Input\InputOption;
 class Application extends WrapperApplication
 {
     /**
-     * Override default logger instance.
-     * Default logger class is \Psr\Log\NullLogger
-     * Return instance must be implement the \Psr\Log\LoggerInterface
-     * 
-     * @return \Psr\Log\LoggerInterface
-     */
-    protected function createDefaultLogger()
-    {
-        return new Logger();
-    }
-
-    /**
      * Define global command options.
      *  
      * @return array
@@ -191,22 +171,86 @@ $application = new Application();
 // Add command.
 $application->add(new HogeFooCommand());
 
+// Start application.
+$application->run();
+```
+
+### Auto load commands by PSR-4
+
+If project using PSR-4, auto load all commands by ``loadByPsr4`` method.
+
+```php
 /**
  * Auto load commands by PSR-4.
  * 
- * loadByPsr4(namespace, directory)
+ * loadByPsr4(string $nameSpacePrefix, string $targetDir)
  */
 $application->loadByPsr4("\Example\Commands", realpath(__DIR__.'/src/Commands'));
+```
 
+### Using Logger
+
+Set logger instance in execute file. Logger class must be implement the ``\Psr\Log\LoggerInterface`` interface.
+
+in execute file
+```php
 /**
- * Using logger.
- * Logger instance must be implement the \Psr\Log\LoggerInterface
- * Logger instance is auto set to command classes.
+ * Set logger instance to application and command class.
  */
 $application->setLogger($logger);
+```
 
-// Start application.
-$application->run();
+in command class
+```php
+protected function handle()
+{
+    // Using logger.
+    $this->logger();
+}
+```
+
+#### Default logger
+
+Logger instance not sets in application, default using ``\Psr\Log\NullLogger`` class.
+
+```php
+protected function handle()
+{
+    // Output Psr\Log\NullLogger
+    $this->writeln(get_class($this->logger()));
+}
+```
+
+#### Override default logger
+
+Override ``Application::createDefaultLogger`` method. Return instance must be implement the ``\Psr\Log\LoggerInterface`` interface.
+
+```php
+use HirotoK\ConsoleWrapper\Application as WrapperApplication;
+
+class Application extends WrapperApplication
+{
+    /**
+     * Override default logger instance.
+     * Return instance must be implement the \Psr\Log\LoggerInterface
+     * 
+     * @return \Psr\Log\LoggerInterface
+     */
+    protected function createDefaultLogger()
+    {
+        return new Logger();
+    }
+}
+```
+
+#### Using logger in Command::setup
+
+If using logger instance in ``setup`` method, **must be sets the logger instance before commands add**.
+
+```php
+$application->setLogger($logger);
+
+$application->add(new HogeFooCommand());
 ```
 
 ## License
