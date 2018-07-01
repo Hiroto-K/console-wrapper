@@ -16,6 +16,7 @@ use HirotoK\ConsoleWrapper\Tests\Examples\ExampleCommand;
 use HirotoK\ConsoleWrapper\Tests\Examples\ExampleLogger;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class ApplicationTest.
@@ -73,5 +74,20 @@ class ApplicationTest extends TestCase
         };
 
         $this->assertInstanceOf(ExampleLogger::class, $application->logger());
+    }
+
+    public function testGlobalOptions()
+    {
+        $application = new class() extends Application {
+            protected function globalOptions()
+            {
+                return [
+                    ['config', 'c', InputOption::VALUE_REQUIRED, 'Set config file', 'path/to/default'],
+                ];
+            }
+        };
+
+        $definition = $application->getDefinition();
+        $this->assertArrayHasKey('config', $definition->getOptions());
     }
 }
