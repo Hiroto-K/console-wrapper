@@ -26,6 +26,7 @@ class FindByPsr4Test extends TestCase
         $finder = new FindByPsr4('\HirotoK\ConsoleWrapper\Tests', realpath(__DIR__.'/../'));
 
         $classes = $finder->getClasses();
+        $this->assertTrue(in_array('\HirotoK\ConsoleWrapper\Tests\ApplicationTest', $classes, true));
         $this->assertTrue(in_array('\HirotoK\ConsoleWrapper\Tests\CommandFinder\FindByPsr4Test', $classes, true));
     }
 }
