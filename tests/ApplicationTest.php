@@ -12,6 +12,7 @@
 namespace HirotoK\ConsoleWrapper\Tests;
 
 use HirotoK\ConsoleWrapper\Application;
+use HirotoK\ConsoleWrapper\Tests\Examples\ExampleCommand;
 use HirotoK\ConsoleWrapper\Tests\Examples\ExampleLogger;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
@@ -38,6 +39,28 @@ class ApplicationTest extends TestCase
         $application->setLogger($loggerMock);
 
         $this->assertSame($loggerMock, $application->logger());
+    }
+
+    public function testLoggerSetsToCommand()
+    {
+        $application = new Application();
+        $application->add(new ExampleCommand());
+
+        $loggerMock = $this->createMock(\Psr\Log\LoggerInterface::class);
+        $application->setLogger($loggerMock);
+
+        $reflection = new \ReflectionClass($application);
+        $property = $reflection->getParentClass()->getProperty('commands');
+        $property->setAccessible(true);
+        $allCommands = $property->getValue($application);
+        $command = $allCommands['example:command'];
+
+        $reflection = new \ReflectionClass($command);
+        $property = $reflection->getProperty('logger');
+        $property->setAccessible(true);
+        $commandLogger = $property->getValue($command);
+
+        $this->assertSame($loggerMock, $commandLogger);
     }
 
     public function testDefaultLogger()
