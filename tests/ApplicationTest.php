@@ -13,7 +13,6 @@ namespace HirotoK\ConsoleWrapper\Tests;
 
 use HirotoK\ConsoleWrapper\Application;
 use HirotoK\ConsoleWrapper\Tests\Examples\ExampleLogger;
-use HirotoK\ConsoleWrapper\Tests\Examples\ExampleOverrideDefaultLoggerApplication;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
@@ -43,7 +42,12 @@ class ApplicationTest extends TestCase
 
     public function testDefaultLogger()
     {
-        $application = new ExampleOverrideDefaultLoggerApplication();
+        $application = new class() extends Application {
+            protected function createDefaultLogger()
+            {
+                return new ExampleLogger();
+            }
+        };
 
         $this->assertInstanceOf(ExampleLogger::class, $application->logger());
     }
