@@ -40,4 +40,33 @@ class CommandTest extends TestCase
 
         $this->assertTrue($command->isHidden());
     }
+
+    public function testCommandArguments()
+    {
+        $command = new ExampleCommand();
+        $inputDefinition = $command->getDefinition();
+
+        $reflection = new \ReflectionClass($inputDefinition);
+        $property = $reflection->getProperty('arguments');
+        $property->setAccessible(true);
+
+        $arguments = $property->getValue($inputDefinition);
+
+        $this->assertArrayHasKey('first-name', $arguments);
+        $this->assertArrayHasKey('family-name', $arguments);
+    }
+
+    public function testCommandOptions()
+    {
+        $command = new ExampleCommand();
+        $inputDefinition = $command->getDefinition();
+
+        $reflection = new \ReflectionClass($inputDefinition);
+        $property = $reflection->getProperty('options');
+        $property->setAccessible(true);
+
+        $options = $property->getValue($inputDefinition);
+
+        $this->assertArrayHasKey('greeting', $options);
+    }
 }

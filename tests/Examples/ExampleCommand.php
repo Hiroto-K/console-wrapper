@@ -12,6 +12,8 @@
 namespace HirotoK\ConsoleWrapper\Tests\Examples;
 
 use HirotoK\ConsoleWrapper\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class ExampleCommand.
@@ -23,4 +25,19 @@ class ExampleCommand extends Command
     protected $name = 'example:command';
     protected $description = 'This is a test description';
     protected $hidden = true;
+
+    protected function commandArguments()
+    {
+        return [
+            ['first-name', InputArgument::REQUIRED, 'Your first name (required)'],
+            ['family-name', InputArgument::OPTIONAL, 'Your family name (optional)'],
+        ];
+    }
+
+    protected function commandOptions()
+    {
+        return [
+            ['greeting', 'g', InputOption::VALUE_NONE, 'Output greeting'],
+        ];
+    }
 }
