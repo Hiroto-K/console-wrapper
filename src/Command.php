@@ -12,6 +12,7 @@
 namespace HirotoK\ConsoleWrapper;
 
 use HirotoK\ConsoleWrapper\Exception\LogicException;
+use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Helper\Table;
@@ -25,7 +26,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
  *
  * @package HirotoK\ConsoleWrapper
  */
-abstract class Command extends SymfonyCommand
+abstract class Command extends SymfonyCommand implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
