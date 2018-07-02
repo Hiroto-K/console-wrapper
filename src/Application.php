@@ -32,7 +32,7 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
     /**
      * @var \Psr\Log\NullLogger
      */
-    protected $nullLogger;
+    protected $defaultLogger;
 
     /**
      * {@inheritdoc}
@@ -75,11 +75,11 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
             return $this->logger;
         }
 
-        if (!isset($this->nullLogger)) {
-            $this->nullLogger = $this->createDefaultLogger();
+        if (!isset($this->defaultLogger)) {
+            $this->defaultLogger = $this->createDefaultLogger();
         }
 
-        return $this->nullLogger;
+        return $this->defaultLogger;
     }
 
     /**
