@@ -30,7 +30,7 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
     use LoggerAwareTrait;
 
     /**
-     * @var \Psr\Log\NullLogger
+     * @var \Psr\Log\LoggerInterface
      */
     protected $defaultLogger;
 
