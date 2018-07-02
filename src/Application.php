@@ -83,13 +83,7 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
         }
 
         if (!isset($this->defaultLogger)) {
-            $defaultLogger = $this->createDefaultLogger();
-
-            if ($defaultLogger instanceof LoggerInterface) {
-                throw new LogicException('Default logger must be implement the "\Psr\Log\LoggerInterface".');
-            }
-
-            $this->defaultLogger = $defaultLogger;
+            $this->setDefaultLogger();
         }
 
         return $this->defaultLogger;
@@ -119,6 +113,20 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
         if ($command instanceof Command || $command instanceof LoggerAwareInterface) {
             $command->setLogger($this->logger());
         }
+    }
+
+    /**
+     * Set the default logger.
+     */
+    protected function setDefaultLogger()
+    {
+        $defaultLogger = $this->createDefaultLogger();
+
+        if ($defaultLogger instanceof LoggerInterface) {
+            throw new LogicException('Default logger must be implement the "\Psr\Log\LoggerInterface".');
+        }
+
+        $this->defaultLogger = $defaultLogger;
     }
 
     /**
