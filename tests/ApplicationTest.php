@@ -12,6 +12,7 @@
 namespace HirotoK\ConsoleWrapper\Tests;
 
 use HirotoK\ConsoleWrapper\Application;
+use HirotoK\ConsoleWrapper\Exception\LogicException;
 use HirotoK\ConsoleWrapper\Tests\Examples\ExampleCommand;
 use HirotoK\ConsoleWrapper\Tests\Examples\ExampleLogger;
 use PHPUnit\Framework\TestCase;
@@ -97,6 +98,22 @@ class ApplicationTest extends TestCase
         };
 
         $this->assertInstanceOf(ExampleLogger::class, $application->logger());
+    }
+
+    public function testDefaultLoggerNotImplemented()
+    {
+        $application = new class() extends Application {
+            protected function createDefaultLogger()
+            {
+                return new \stdClass();
+            }
+        };
+
+        try {
+            $application->logger();
+        } catch (\LogicException $e) {
+            $this->assertInstanceOf(LogicException::class, $e);
+        }
     }
 
     public function testGlobalOptions()
