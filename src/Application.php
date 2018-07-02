@@ -109,16 +109,6 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
     }
 
     /**
-     * Create default logger instance.
-     *
-     * @return \Psr\Log\LoggerInterface
-     */
-    protected function createDefaultLogger()
-    {
-        return new NullLogger();
-    }
-
-    /**
      * Gets the default input definition.
      *
      * @return \Symfony\Component\Console\Input\InputDefinition
@@ -134,6 +124,16 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
         }
 
         return $definition;
+    }
+
+    /**
+     * Create default logger instance.
+     *
+     * @return \Psr\Log\LoggerInterface
+     */
+    protected function createDefaultLogger()
+    {
+        return new NullLogger();
     }
 
     /**
