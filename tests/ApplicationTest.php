@@ -42,13 +42,36 @@ class ApplicationTest extends TestCase
         $this->assertSame($loggerMock, $application->logger());
     }
 
-    public function testLoggerSetsToCommand()
+    public function testSetLoggerAfterAddCommand()
     {
         $application = new Application();
         $application->add(new ExampleCommand());
 
         $loggerMock = $this->createMock(\Psr\Log\LoggerInterface::class);
         $application->setLogger($loggerMock);
+
+        $reflection = new \ReflectionClass($application);
+        $property = $reflection->getParentClass()->getProperty('commands');
+        $property->setAccessible(true);
+        $allCommands = $property->getValue($application);
+        $command = $allCommands['example:command'];
+
+        $reflection = new \ReflectionClass($command);
+        $property = $reflection->getProperty('logger');
+        $property->setAccessible(true);
+        $commandLogger = $property->getValue($command);
+
+        $this->assertSame($loggerMock, $commandLogger);
+    }
+
+    public function testSetLoggerBeforeAddCommand()
+    {
+        $application = new Application();
+
+        $loggerMock = $this->createMock(\Psr\Log\LoggerInterface::class);
+        $application->setLogger($loggerMock);
+
+        $application->add(new ExampleCommand());
 
         $reflection = new \ReflectionClass($application);
         $property = $reflection->getParentClass()->getProperty('commands');
