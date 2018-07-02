@@ -13,7 +13,6 @@ namespace HirotoK\ConsoleWrapper;
 
 use HirotoK\ConsoleWrapper\CommandFinder\FindByPsr4;
 use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\Console\Application as SymfonyApplication;
@@ -27,7 +26,12 @@ use Symfony\Component\Console\Input\InputOption;
  */
 class Application extends SymfonyApplication implements LoggerAwareInterface
 {
-    use LoggerAwareTrait;
+    /**
+     * The logger instance.
+     *
+     * @var \Psr\Log\LoggerInterface
+     */
+    protected $logger;
 
     /**
      * @var \Psr\Log\LoggerInterface
