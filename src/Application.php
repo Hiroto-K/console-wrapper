@@ -43,9 +43,7 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
      */
     public function add(SymfonyCommand $command)
     {
-        if ($command instanceof Command) {
-            $command->setLogger($this->logger());
-        }
+        $this->setLoggerToCommand($command);
 
         return parent::add($command);
     }
@@ -94,9 +92,19 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
         $this->logger = $logger;
 
         foreach ($this->all() as $name => $command) {
-            if ($command instanceof Command) {
-                $command->setLogger($this->logger);
-            }
+            $this->setLoggerToCommand($command);
+        }
+    }
+
+    /**
+     * Sets logger instance to command instance.
+     *
+     * @param \Symfony\Component\Console\Command\Command $command
+     */
+    protected function setLoggerToCommand(SymfonyCommand $command)
+    {
+        if ($command instanceof Command || $command instanceof LoggerAwareInterface) {
+            $command->setLogger($this->logger());
         }
     }
 
