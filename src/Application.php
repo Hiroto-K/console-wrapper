@@ -34,6 +34,8 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
     protected $logger;
 
     /**
+     * Default logger instance.
+     *
      * @var \Psr\Log\LoggerInterface
      */
     protected $defaultLogger;
