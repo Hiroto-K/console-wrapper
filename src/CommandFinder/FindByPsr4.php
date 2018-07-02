@@ -44,6 +44,10 @@ class FindByPsr4
      */
     public function __construct($nameSpacePrefix, $targetDir)
     {
+        if ('\\' !== $nameSpacePrefix[0]) {
+            $nameSpacePrefix = '\\'.$nameSpacePrefix;
+        }
+
         $this->nameSpacePrefix = $nameSpacePrefix;
         $this->targetDir = $targetDir;
     }
