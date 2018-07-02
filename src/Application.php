@@ -12,6 +12,7 @@
 namespace HirotoK\ConsoleWrapper;
 
 use HirotoK\ConsoleWrapper\CommandFinder\FindByPsr4;
+use HirotoK\ConsoleWrapper\Exception\LogicException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -82,7 +83,13 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
         }
 
         if (!isset($this->defaultLogger)) {
-            $this->defaultLogger = $this->createDefaultLogger();
+            $defaultLogger = $this->createDefaultLogger();
+
+            if ($defaultLogger instanceof LoggerInterface) {
+                throw new LogicException('Default logger must be implement the "\Psr\Log\LoggerInterface".');
+            }
+
+            $this->defaultLogger = $defaultLogger;
         }
 
         return $this->defaultLogger;
