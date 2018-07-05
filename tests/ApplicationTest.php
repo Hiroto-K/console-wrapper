@@ -111,6 +111,8 @@ class ApplicationTest extends TestCase
 
         try {
             $application->logger();
+
+            $this->fail('Application::logger method does not throw the LogicException.');
         } catch (\LogicException $e) {
             $this->assertInstanceOf(LogicException::class, $e);
         }
