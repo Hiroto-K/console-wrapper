@@ -93,10 +93,11 @@ abstract class Command extends SymfonyCommand implements LoggerAwareInterface
             ->setHidden($this->hidden);
 
         foreach ($this->commandArguments() as $arguments) {
-            call_user_func_array([$this, 'addArgument'], $arguments);
+            $this->addArgument(...$arguments);
         }
+
         foreach ($this->commandOptions() as $options) {
-            call_user_func_array([$this, 'addOption'], $options);
+            $this->addOption(...$options);
         }
     }
 
