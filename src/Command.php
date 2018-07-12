@@ -136,7 +136,7 @@ abstract class Command extends SymfonyCommand implements LoggerAwareInterface
     protected function argument($name = null)
     {
         if (is_null($name)) {
-            return $this->input->getArguments();
+            return $this->arguments();
         }
 
         return $this->input->getArgument($name);
@@ -149,7 +149,7 @@ abstract class Command extends SymfonyCommand implements LoggerAwareInterface
      */
     protected function arguments()
     {
-        return $this->argument();
+        return $this->input->getArguments();
     }
 
     /**
