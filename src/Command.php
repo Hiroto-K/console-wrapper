@@ -176,7 +176,7 @@ abstract class Command extends SymfonyCommand implements LoggerAwareInterface
     protected function option($name = null)
     {
         if (is_null($name)) {
-            return $this->input->getOptions();
+            return $this->options();
         }
 
         return $this->input->getOption($name);
@@ -189,7 +189,7 @@ abstract class Command extends SymfonyCommand implements LoggerAwareInterface
      */
     protected function options()
     {
-        return $this->option();
+        return $this->input->getOptions();
     }
 
     /**
