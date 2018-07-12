@@ -101,6 +101,18 @@ abstract class Command extends SymfonyCommand implements LoggerAwareInterface
     }
 
     /**
+     * Initialize the command.
+     *
+     * @param \Symfony\Component\Console\Input\InputInterface  $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     */
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        $this->input = $input;
+        $this->output = $output;
+    }
+
+    /**
      * Execute the command.
      *
      * @param \Symfony\Component\Console\Input\InputInterface  $input
@@ -110,9 +122,6 @@ abstract class Command extends SymfonyCommand implements LoggerAwareInterface
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->input = $input;
-        $this->output = $output;
-
         return $this->handle();
     }
 
