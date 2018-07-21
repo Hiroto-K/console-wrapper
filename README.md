@@ -331,7 +331,10 @@ protected function handle()
 
 customize tables, place see the ``\Symfony\Component\Console\Helper\Table`` class.
 
+- [Document of Table class](http://symfony.com/doc/current/components/console/helpers/table.html)
+
 ```php
+// Set the column width.
 $this
     ->table($headers, $rows)
     ->setColumnWidth(0, 10)
