@@ -46,21 +46,17 @@ class ApplicationTest extends TestCase
     public function testSetLoggerAfterAddCommand()
     {
         $application = new Application();
-        $application->add(new ExampleCommand());
+        $exampleCommand = new ExampleCommand();
+
+        $application->add($exampleCommand);
 
         $loggerMock = $this->createMock(\Psr\Log\LoggerInterface::class);
         $application->setLogger($loggerMock);
 
-        $reflection = new \ReflectionClass($application);
-        $property = $reflection->getParentClass()->getProperty('commands');
-        $property->setAccessible(true);
-        $allCommands = $property->getValue($application);
-        $command = $allCommands['example:command'];
-
-        $reflection = new \ReflectionClass($command);
+        $reflection = new \ReflectionClass($exampleCommand);
         $property = $reflection->getProperty('logger');
         $property->setAccessible(true);
-        $commandLogger = $property->getValue($command);
+        $commandLogger = $property->getValue($exampleCommand);
 
         $this->assertSame($loggerMock, $commandLogger);
     }
@@ -68,22 +64,17 @@ class ApplicationTest extends TestCase
     public function testSetLoggerBeforeAddCommand()
     {
         $application = new Application();
+        $exampleCommand = new ExampleCommand();
 
         $loggerMock = $this->createMock(\Psr\Log\LoggerInterface::class);
         $application->setLogger($loggerMock);
 
-        $application->add(new ExampleCommand());
+        $application->add($exampleCommand);
 
-        $reflection = new \ReflectionClass($application);
-        $property = $reflection->getParentClass()->getProperty('commands');
-        $property->setAccessible(true);
-        $allCommands = $property->getValue($application);
-        $command = $allCommands['example:command'];
-
-        $reflection = new \ReflectionClass($command);
+        $reflection = new \ReflectionClass($exampleCommand);
         $property = $reflection->getProperty('logger');
         $property->setAccessible(true);
-        $commandLogger = $property->getValue($command);
+        $commandLogger = $property->getValue($exampleCommand);
 
         $this->assertSame($loggerMock, $commandLogger);
     }
