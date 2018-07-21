@@ -245,7 +245,7 @@ class Application extends WrapperApplication
 
 #### Using logger in Command::setup
 
-If using logger instance in ``setup`` method, **must be sets the logger instance before commands add**.
+If using logger instance in ``Command::setup()`` method, **must be sets the logger instance before commands add**.
 
 ```php
 // Register logger instance
