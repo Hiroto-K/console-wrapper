@@ -43,7 +43,7 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * Test setLogger
+     * Test setLogger.
      *
      * add command => set logger
      */
@@ -65,7 +65,7 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * Test setLogger
+     * Test setLogger.
      *
      * set logger => add command
      */
