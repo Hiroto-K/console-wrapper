@@ -74,6 +74,7 @@ class ApplicationTest extends TestCase
 
         $loggerMock = $this->createMock(\Psr\Log\LoggerInterface::class);
         $application->setLogger($loggerMock);
+
         $application->add($exampleCommand);
 
         $commandLogger = $this->getProperty($exampleCommand, 'logger');
