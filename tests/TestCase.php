@@ -53,4 +53,24 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $property->setAccessible(true);
         $property->setValue($obj, $propertyValue);
     }
+
+    /**
+     * Call private and protected method.
+     *
+     * @param object $obj
+     * @param string $methodName
+     * @param mixed ...$args
+     *
+     * @return mixed
+     *
+     * @throws \ReflectionException
+     */
+    protected function callMethod($obj, $methodName, ...$args)
+    {
+        $reflection = new \ReflectionClass($obj);
+        $method = $reflection->getMethod($methodName);
+        $method->setAccessible(true);
+
+        return $method->invoke($obj, ...$args);
+    }
 }
