@@ -303,12 +303,12 @@ abstract class Command extends SymfonyCommand implements LoggerAwareInterface
     /**
      * Create table.
      *
-     * @param array $headers
-     * @param array $rows
+     * @param array|null $headers
+     * @param array|null $rows
      *
      * @return \Symfony\Component\Console\Helper\Table
      */
-    protected function table($headers, $rows)
+    protected function table(?array $headers = null, ?array $rows = null)
     {
         $table = new Table($this->output);
         $table
