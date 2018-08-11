@@ -62,11 +62,9 @@ class CommandTest extends TestCase
         $command = new ExampleCommand();
         $this->setProperty($command, 'output', $this->createOutputMock());
 
-        $reflection = new \ReflectionClass($command);
-        $method = $reflection->getMethod('table');
-        $method->setAccessible(true);
+        $table = $this->callMethod($command, 'table');
 
-        $this->assertInstanceOf(\Symfony\Component\Console\Helper\Table::class, $method->invoke($command));
+        $this->assertInstanceOf(\Symfony\Component\Console\Helper\Table::class, $table);
     }
 
     protected function createOutputMock()
