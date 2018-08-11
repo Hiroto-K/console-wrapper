@@ -307,15 +307,19 @@ protected function handle()
 ```php
 protected function handle()
 {
+    // Only creates Table class instance.
+    $table = $this->table();
+
+    // Sets headers and rows
     $headers = ['name', 'location'];
     $rows = [
         ['Hoge', 'jp'],
         ['Foo', 'us'],
     ];
+    $table = $this->table($headers, $rows)
 
-    $this
-        ->table($headers, $rows)
-        ->render();
+    // Render table
+    $table->render();
 }
 ```
 
