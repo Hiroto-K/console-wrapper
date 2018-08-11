@@ -16,7 +16,7 @@ namespace HirotoK\ConsoleWrapper\Tests;
  *
  * @package HirotoK\ConsoleWrapper\Tests
  */
-class TestCase extends \PHPUnit\Framework\TestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
      * Get the property name.
