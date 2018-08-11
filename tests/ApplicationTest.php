@@ -15,7 +15,6 @@ use HirotoK\ConsoleWrapper\Application;
 use HirotoK\ConsoleWrapper\Exception\LogicException;
 use HirotoK\ConsoleWrapper\Tests\Examples\ExampleCommand;
 use HirotoK\ConsoleWrapper\Tests\Examples\ExampleLogger;
-use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -53,10 +52,7 @@ class ApplicationTest extends TestCase
         $loggerMock = $this->createMock(\Psr\Log\LoggerInterface::class);
         $application->setLogger($loggerMock);
 
-        $reflection = new \ReflectionClass($exampleCommand);
-        $property = $reflection->getProperty('logger');
-        $property->setAccessible(true);
-        $commandLogger = $property->getValue($exampleCommand);
+        $commandLogger = $this->getProperty($exampleCommand, 'logger');
 
         $this->assertSame($loggerMock, $commandLogger);
     }
@@ -68,13 +64,9 @@ class ApplicationTest extends TestCase
 
         $loggerMock = $this->createMock(\Psr\Log\LoggerInterface::class);
         $application->setLogger($loggerMock);
-
         $application->add($exampleCommand);
 
-        $reflection = new \ReflectionClass($exampleCommand);
-        $property = $reflection->getProperty('logger');
-        $property->setAccessible(true);
-        $commandLogger = $property->getValue($exampleCommand);
+        $commandLogger = $this->getProperty($exampleCommand, 'logger');
 
         $this->assertSame($loggerMock, $commandLogger);
     }
