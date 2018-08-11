@@ -52,8 +52,10 @@ class ApplicationTest extends TestCase
         $application = new Application();
         $exampleCommand = new ExampleCommand();
 
+        // Add command
         $application->add($exampleCommand);
 
+        // Set logger
         $loggerMock = $this->createMock(\Psr\Log\LoggerInterface::class);
         $application->setLogger($loggerMock);
 
@@ -72,9 +74,11 @@ class ApplicationTest extends TestCase
         $application = new Application();
         $exampleCommand = new ExampleCommand();
 
+        // Set logger
         $loggerMock = $this->createMock(\Psr\Log\LoggerInterface::class);
         $application->setLogger($loggerMock);
 
+        // Add command
         $application->add($exampleCommand);
 
         $commandLogger = $this->getProperty($exampleCommand, 'logger');
