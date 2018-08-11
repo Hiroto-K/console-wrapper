@@ -42,6 +42,11 @@ class ApplicationTest extends TestCase
         $this->assertSame($loggerMock, $application->logger());
     }
 
+    /**
+     * Test setLogger
+     *
+     * add command => set logger
+     */
     public function testSetLoggerAfterAddCommand()
     {
         $application = new Application();
@@ -57,6 +62,11 @@ class ApplicationTest extends TestCase
         $this->assertSame($loggerMock, $commandLogger);
     }
 
+    /**
+     * Test setLogger
+     *
+     * set logger => add command
+     */
     public function testSetLoggerBeforeAddCommand()
     {
         $application = new Application();
