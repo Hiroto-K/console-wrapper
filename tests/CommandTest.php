@@ -80,6 +80,24 @@ class CommandTest extends TestCase
         $this->assertNotCount(0, $this->getProperty($table, 'headers'));
     }
 
+    public function testTableSetRows()
+    {
+        $headers = ['name', 'age', 'loc'];
+        $rows = [
+            ['a', '10', 'jp'],
+            ['b', '20', 'us'],
+        ];
+
+        $command = new ExampleCommand();
+        $this->setProperty($command, 'output', $this->createOutputMock());
+
+        $table = $this->callMethod($command, 'table', $headers, $rows);
+
+        $this->assertInstanceOf(\Symfony\Component\Console\Helper\Table::class, $table);
+        $this->assertNotCount(0, $this->getProperty($table, 'headers'));
+        $this->assertNotCount(0, $this->getProperty($table, 'rows'));
+    }
+
     protected function createOutputMock()
     {
         return $this->createMock(\Symfony\Component\Console\Output\OutputInterface::class);
