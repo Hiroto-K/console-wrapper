@@ -311,9 +311,12 @@ abstract class Command extends SymfonyCommand implements LoggerAwareInterface
     protected function table(?array $headers = null, ?array $rows = null)
     {
         $table = new Table($this->output);
-        $table
-            ->setHeaders($headers)
-            ->setRows($rows);
+        if (isset($headers)) {
+            $table->setHeaders($headers);
+        }
+        if (isset($rows)) {
+            $table->setRows($rows);
+        }
 
         return $table;
     }
