@@ -12,7 +12,6 @@
 namespace HirotoK\ConsoleWrapper\Tests;
 
 use HirotoK\ConsoleWrapper\Tests\Examples\ExampleCommand;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Class CommandTest.
@@ -61,11 +60,9 @@ class CommandTest extends TestCase
     public function testTable()
     {
         $command = new ExampleCommand();
+        $this->setProperty($command, 'output', $this->createOutputMock());
 
         $reflection = new \ReflectionClass($command);
-        $output = $reflection->getProperty('output');
-        $output->setAccessible(true);
-        $output->setValue($command, $this->createOutputMock());
         $method = $reflection->getMethod('table');
         $method->setAccessible(true);
 
