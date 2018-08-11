@@ -57,4 +57,19 @@ class CommandTest extends TestCase
 
         $this->assertArrayHasKey('greeting', $definition->getOptions());
     }
+
+    public function testTable()
+    {
+        $command = new ExampleCommand();
+
+        $outputMock = $this->createMock(\Symfony\Component\Console\Output\OutputInterface::class);
+        $reflection = new \ReflectionClass($command);
+        $output = $reflection->getProperty('output');
+        $output->setAccessible(true);
+        $output->setValue($command, $outputMock);
+        $method = $reflection->getMethod('table');
+        $method->setAccessible(true);
+
+        $this->assertInstanceOf(\Symfony\Component\Console\Helper\Table::class, $method->invoke($command));
+    }
 }
