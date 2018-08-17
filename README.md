@@ -1,7 +1,7 @@
 # console-wrapper
 
-[![Build status](https://img.shields.io/travis/Hiroto-K/console-wrapper/master.svg?style=flat-square)](https://travis-ci.org/Hiroto-K/console-wrapper)
-[![License](https://img.shields.io/github/license/Hiroto-K/console-wrapper.svg?style=flat-square)](https://github.com/Hiroto-K/console-wrapper/blob/master/LICENSE)
+[![Build status](https://img.shields.io/travis/hiroto-k/console-wrapper/master.svg?style=flat-square)](https://travis-ci.org/hiroto-k/console-wrapper)
+[![License](https://img.shields.io/github/license/hiroto-k/console-wrapper.svg?style=flat-square)](https://github.com/hiroto-k/console-wrapper/blob/master/LICENSE)
 
 Wrapper class of symfony/console
 
@@ -347,4 +347,4 @@ $this
 
 ## License
 
-[MIT License](https://github.com/Hiroto-K/console-wrapper/blob/master/LICENSE "MIT License")
+[MIT License](https://github.com/hiroto-k/console-wrapper/blob/master/LICENSE "MIT License")
