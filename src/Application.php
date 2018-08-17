@@ -82,7 +82,7 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
             return $this->logger;
         }
 
-        if (!isset($this->defaultLogger)) {
+        if (! isset($this->defaultLogger)) {
             $this->setDefaultLogger();
         }
 
@@ -122,7 +122,7 @@ class Application extends SymfonyApplication implements LoggerAwareInterface
     {
         $defaultLogger = $this->createDefaultLogger();
 
-        if (!$defaultLogger instanceof LoggerInterface) {
+        if (! $defaultLogger instanceof LoggerInterface) {
             throw new LogicException('Default logger must be implement the "\Psr\Log\LoggerInterface".');
         }
 
