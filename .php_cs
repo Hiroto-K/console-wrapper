@@ -71,6 +71,7 @@ $rules = [
         'comment_types' => ['hash'],
     ],
 ];
+
 $finder = Finder::create()
     ->ignoreDotFiles(false)
     ->name('.php_cs')
