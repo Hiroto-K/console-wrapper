@@ -98,6 +98,11 @@ class CommandTest extends TestCase
         $this->assertNotCount(0, $this->getProperty($table, 'rows'));
     }
 
+    protected function createInputMock()
+    {
+        return $this->createMock(\Symfony\Component\Console\Input\InputInterface::class);
+    }
+
     protected function createOutputMock()
     {
         return $this->createMock(\Symfony\Component\Console\Output\OutputInterface::class);
