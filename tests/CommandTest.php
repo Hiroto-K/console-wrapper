@@ -40,6 +40,21 @@ class CommandTest extends TestCase
         $this->assertTrue($command->isHidden());
     }
 
+    public function testArgument()
+    {
+        $command = new ExampleCommand();
+
+        $inputMock = $this->createInputMock();
+        $inputMock
+            ->method('getArgument')
+            ->with('hoge')
+            ->willReturn('foo');
+
+        $this->setProperty($command, 'input', $inputMock);
+
+        $this->assertSame('foo', $this->callMethod($command, 'argument', 'hoge'));
+    }
+
     public function testCommandArguments()
     {
         $command = new ExampleCommand();
