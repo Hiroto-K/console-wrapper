@@ -49,7 +49,6 @@ class CommandTest extends TestCase
             ->method('getArgument')
             ->with('hoge')
             ->willReturn('foo');
-
         $this->setProperty($command, 'input', $inputMock);
 
         $this->assertSame('foo', $this->callMethod($command, 'argument', 'hoge'));
@@ -68,7 +67,6 @@ class CommandTest extends TestCase
         $inputMock
             ->method('getArguments')
             ->willReturn($arguments);
-
         $this->setProperty($command, 'input', $inputMock);
 
         $this->assertSame($arguments, $this->callMethod($command, 'argument'));
@@ -87,7 +85,6 @@ class CommandTest extends TestCase
         $inputMock
             ->method('getArguments')
             ->willReturn($arguments);
-
         $this->setProperty($command, 'input', $inputMock);
 
         $this->assertSame($arguments, $this->callMethod($command, 'arguments'));
