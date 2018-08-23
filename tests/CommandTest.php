@@ -93,6 +93,20 @@ class CommandTest extends TestCase
         $this->assertSame($arguments, $this->callMethod($command, 'arguments'));
     }
 
+    public function testHasArgument()
+    {
+        $command = new ExampleCommand();
+
+        $inputMock = $this->createInputMock();
+        $inputMock
+            ->method('hasArgument')
+            ->with('hoge')
+            ->willReturn(true);
+        $this->setProperty($command, 'input', $inputMock);
+
+        $this->assertTrue($this->callMethod($command, 'hasArgument', 'hoge'));
+    }
+
     public function testCommandArguments()
     {
         $command = new ExampleCommand();
