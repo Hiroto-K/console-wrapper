@@ -196,23 +196,6 @@ class CommandTest extends TestCase
         $this->assertFalse($this->callMethod($command, 'hasOption', 'hoge'));
     }
 
-    public function testCommandArguments()
-    {
-        $command = new ExampleCommand();
-        $definition = $command->getDefinition();
-
-        $this->assertArrayHasKey('first-name', $definition->getArguments());
-        $this->assertArrayHasKey('family-name', $definition->getArguments());
-    }
-
-    public function testCommandOptions()
-    {
-        $command = new ExampleCommand();
-        $definition = $command->getDefinition();
-
-        $this->assertArrayHasKey('greeting', $definition->getOptions());
-    }
-
     public function testTable()
     {
         $command = new ExampleCommand();
@@ -252,6 +235,23 @@ class CommandTest extends TestCase
         $this->assertInstanceOf(\Symfony\Component\Console\Helper\Table::class, $table);
         $this->assertNotCount(0, $this->getProperty($table, 'headers'));
         $this->assertNotCount(0, $this->getProperty($table, 'rows'));
+    }
+
+    public function testCommandArguments()
+    {
+        $command = new ExampleCommand();
+        $definition = $command->getDefinition();
+
+        $this->assertArrayHasKey('first-name', $definition->getArguments());
+        $this->assertArrayHasKey('family-name', $definition->getArguments());
+    }
+
+    public function testCommandOptions()
+    {
+        $command = new ExampleCommand();
+        $definition = $command->getDefinition();
+
+        $this->assertArrayHasKey('greeting', $definition->getOptions());
     }
 
     protected function createInputMock()
