@@ -237,13 +237,14 @@ class CommandTest extends TestCase
         $this->assertNotCount(0, $this->getProperty($table, 'rows'));
     }
 
-    public function testLogger(){
+    public function testLogger()
+    {
         $loggerMock = $this->createMock(\Psr\Log\LoggerInterface::class);
         $command = new ExampleCommand();
 
-        $this->setProperty($command, "logger", $loggerMock);
+        $this->setProperty($command, 'logger', $loggerMock);
 
-        $this->assertSame($loggerMock, $this->callMethod($command, "logger"));
+        $this->assertSame($loggerMock, $this->callMethod($command, 'logger'));
     }
 
     public function testCommandArguments()
