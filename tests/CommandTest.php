@@ -151,7 +151,7 @@ class CommandTest extends TestCase
             ->willReturn($options);
         $this->setProperty($command, 'input', $inputMock);
 
-        $this->assertSame($options, $this->callMethod($command, "options"));
+        $this->assertSame($options, $this->callMethod($command, 'options'));
     }
 
     public function testHasOptionReturnTrue()
