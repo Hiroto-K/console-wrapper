@@ -40,7 +40,7 @@ class CommandTest extends TestCase
         $this->assertTrue($command->isHidden());
     }
 
-    public function testArgument()
+    public function testArgumentWithName()
     {
         $command = new ExampleCommand();
 
