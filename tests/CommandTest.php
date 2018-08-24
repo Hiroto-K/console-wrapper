@@ -11,6 +11,8 @@
 
 namespace HirotoK\ConsoleWrapper\Tests;
 
+use HirotoK\ConsoleWrapper\Command;
+use HirotoK\ConsoleWrapper\Exception\LogicException;
 use HirotoK\ConsoleWrapper\Tests\Examples\ExampleCommand;
 
 /**
@@ -38,6 +40,21 @@ class CommandTest extends TestCase
         $command = new ExampleCommand();
 
         $this->assertTrue($command->isHidden());
+    }
+
+    public function testHandle(){
+        try {
+            $command = new class extends Command {
+                protected $name = "command:name";
+            };
+
+            $this->callMethod($command, "handle");
+
+            $this->fail("Command::handle method not throw exception.");
+        }
+        catch (\Exception $e){
+            $this->assertInstanceOf(LogicException::class, $e);
+        }
     }
 
     public function testArgumentWithName()
