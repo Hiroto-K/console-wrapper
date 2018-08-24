@@ -42,17 +42,17 @@ class CommandTest extends TestCase
         $this->assertTrue($command->isHidden());
     }
 
-    public function testHandle(){
+    public function testHandle()
+    {
         try {
-            $command = new class extends Command {
-                protected $name = "command:name";
+            $command = new class() extends Command {
+                protected $name = 'command:name';
             };
 
-            $this->callMethod($command, "handle");
+            $this->callMethod($command, 'handle');
 
-            $this->fail("Command::handle method not throw exception.");
-        }
-        catch (\Exception $e){
+            $this->fail('Command::handle method not throw exception.');
+        } catch (\Exception $e) {
             $this->assertInstanceOf(LogicException::class, $e);
         }
     }
