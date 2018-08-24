@@ -57,6 +57,19 @@ class CommandTest extends TestCase
         }
     }
 
+    public function testInitialize() {
+        $command = new class extends Command {
+            protected $name = 'command:name';
+        };
+        $input = $this->createInputMock();
+        $output = $this->createOutputMock();
+
+        $this->callMethod($command, "initialize", $input, $output);
+
+        $this->assertSame($input, $this->getProperty($command, "input"));
+        $this->assertSame($output, $this->getProperty($command, "output"));
+    }
+
     public function testArgumentWithName()
     {
         $command = new ExampleCommand();
