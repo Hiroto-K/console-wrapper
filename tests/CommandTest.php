@@ -71,6 +71,24 @@ class CommandTest extends TestCase
         $this->assertSame($output, $this->getProperty($command, 'output'));
     }
 
+    public function testExecute()
+    {
+        $command = new class() extends Command {
+            protected $name = 'command:name';
+
+            protected function handle()
+            {
+                return 'handle return value';
+            }
+        };
+        $input = $this->createInputMock();
+        $output = $this->createOutputMock();
+
+        $returnValue = $this->callMethod($command, 'execute', $input, $output);
+
+        $this->assertSame('handle return value', $returnValue);
+    }
+
     public function testArgumentWithName()
     {
         $command = new ExampleCommand();
