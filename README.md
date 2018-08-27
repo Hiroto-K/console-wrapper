@@ -1,6 +1,7 @@
 # console-wrapper
 
 [![Build Status](https://travis-ci.org/hiroto-k/console-wrapper.svg?branch=master)](https://travis-ci.org/hiroto-k/console-wrapper)
+[![PHP from Packagist](https://img.shields.io/packagist/php-v/hiroto-k/console-wrapper.svg)](https://packagist.org/packages/hiroto-k/console-wrapper)
 [![Coverage Status](https://coveralls.io/repos/github/hiroto-k/console-wrapper/badge.svg?branch=master)](https://coveralls.io/github/hiroto-k/console-wrapper?branch=master)
 [![License](https://img.shields.io/github/license/hiroto-k/console-wrapper.svg)](https://github.com/hiroto-k/console-wrapper/blob/master/LICENSE)
 
