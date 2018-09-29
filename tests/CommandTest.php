@@ -289,6 +289,78 @@ class CommandTest extends TestCase
         $this->assertContains('put', $output);
     }
 
+    public function testInfo()
+    {
+        $command = new class() extends Command {
+            protected $name = 'test:info';
+
+            public function handle()
+            {
+                $this->info('test output info');
+            }
+        };
+
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([]);
+
+        $output = $commandTester->getDisplay();
+        $this->assertContains('test output info', $output);
+    }
+
+    public function testComment()
+    {
+        $command = new class() extends Command {
+            protected $name = 'test:comment';
+
+            public function handle()
+            {
+                $this->comment('test output comment');
+            }
+        };
+
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([]);
+
+        $output = $commandTester->getDisplay();
+        $this->assertContains('test output comment', $output);
+    }
+
+    public function testQuestion()
+    {
+        $command = new class() extends Command {
+            protected $name = 'test:question';
+
+            public function handle()
+            {
+                $this->question('test output question');
+            }
+        };
+
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([]);
+
+        $output = $commandTester->getDisplay();
+        $this->assertContains('test output question', $output);
+    }
+
+    public function testError()
+    {
+        $command = new class() extends Command {
+            protected $name = 'test:error';
+
+            public function handle()
+            {
+                $this->error('test output error');
+            }
+        };
+
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([]);
+
+        $output = $commandTester->getDisplay();
+        $this->assertContains('test output error', $output);
+    }
+
     public function testCallCommand()
     {
         $command1 = new class() extends Command {
