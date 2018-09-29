@@ -6,7 +6,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/ba59e655bdc9c4410966/maintainability)](https://codeclimate.com/github/hiroto-k/console-wrapper/maintainability)
 [![License](https://img.shields.io/github/license/hiroto-k/console-wrapper.svg)](https://github.com/hiroto-k/console-wrapper/blob/master/LICENSE)
 
-Wrapper class of symfony/console
+Wrapper class of [symfony/console](https://github.com/symfony/console)
 
 ## Install
 
