@@ -14,6 +14,7 @@ namespace HirotoK\ConsoleWrapper\Tests;
 use HirotoK\ConsoleWrapper\Command;
 use HirotoK\ConsoleWrapper\Exception\LogicException;
 use HirotoK\ConsoleWrapper\Tests\Examples\ExampleCommand;
+use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * Class CommandTest.
@@ -243,6 +244,48 @@ class CommandTest extends TestCase
         $this->setProperty($command, 'input', $inputMock);
 
         $this->assertFalse($this->callMethod($command, 'hasOption', 'hoge'));
+    }
+
+    public function testWritelnWithString()
+    {
+        $command = new class() extends Command {
+            protected $name = 'test:writeln';
+
+            public function handle()
+            {
+                $this->writeln('test output');
+            }
+        };
+
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([]);
+
+        $output = $commandTester->getDisplay();
+        $this->assertContains('test output', $output);
+    }
+
+    public function testWritelnWithIterable()
+    {
+        $command = new class() extends Command {
+            protected $name = 'test:writeln';
+
+            public function handle()
+            {
+                $this->writeln([
+                    'test',
+                    'out',
+                    'put',
+                ]);
+            }
+        };
+
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([]);
+
+        $output = $commandTester->getDisplay();
+        $this->assertContains('test', $output);
+        $this->assertContains('out', $output);
+        $this->assertContains('put', $output);
     }
 
     public function testTable()
