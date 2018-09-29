@@ -11,6 +11,7 @@
 
 namespace HirotoK\ConsoleWrapper\Tests;
 
+use HirotoK\ConsoleWrapper\Application;
 use HirotoK\ConsoleWrapper\Command;
 use HirotoK\ConsoleWrapper\Exception\LogicException;
 use HirotoK\ConsoleWrapper\Tests\Examples\ExampleCommand;
@@ -286,6 +287,35 @@ class CommandTest extends TestCase
         $this->assertContains('test', $output);
         $this->assertContains('out', $output);
         $this->assertContains('put', $output);
+    }
+
+    public function testCallCommand()
+    {
+        $command1 = new class() extends Command {
+            protected $name = 'command1';
+
+            protected function handle()
+            {
+                $this->output->writeln($this->getName());
+            }
+        };
+        $command2 = new class() extends Command {
+            protected $name = 'command2';
+
+            protected function handle()
+            {
+                $this->callCommand('command1');
+            }
+        };
+
+        $app = new Application();
+        $app->addCommands([$command1, $command2]);
+
+        $commandTester = new CommandTester($command2);
+        $commandTester->execute([]);
+
+        $output = $commandTester->getDisplay();
+        $this->assertContains('command1', $output);
     }
 
     public function testTable()
