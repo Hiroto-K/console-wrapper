@@ -446,8 +446,8 @@ Call other command in command class.
 ```php
 protected function handle()
 {
-    // Call "hoge:ex" command
-    $this->callCommand('hoge:ex');
+    // Call the "other-command-name" command
+    $this->callCommand('other-command-name');
 }
 ```
 
@@ -456,8 +456,8 @@ with parameters
 ```php
 protected function handle()
 {
-    // Call "hoge:ex" command, with name parameter
-    $this->callCommand('hoge:ex', ['name' => 'example']);
+    // Call the "other-command-name" command, with name parameter
+    $this->callCommand('other-command-name', ['name' => 'example']);
 }
 ```
 
