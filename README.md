@@ -329,7 +329,7 @@ If project using PSR-4, auto load all commands by ``loadByPsr4`` method.
  * 
  * loadByPsr4(string $nameSpacePrefix, string $targetDir)
  */
-$application->loadByPsr4("\Example\Commands", realpath(__DIR__.'/src/Commands'));
+$application->loadByPsr4("\ExampleApp\Commands", realpath(__DIR__.'/src/Commands'));
 ```
 
 ### Logger
