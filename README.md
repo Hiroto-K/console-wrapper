@@ -323,7 +323,7 @@ protected function handle()
 
 ### Auto add commands by PSR-4
 
-If project using PSR-4, auto load all commands by ``loadByPsr4()`` method.
+If project using PSR-4, auto load all commands by ``Application::loadByPsr4()`` method.
 
 ```php
 /**
