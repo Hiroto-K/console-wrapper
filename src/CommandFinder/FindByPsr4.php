@@ -93,16 +93,13 @@ class FindByPsr4
     protected function findPhpFiles()
     {
         $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->targetDir));
-        $files = [];
         $extension = 'php';
 
         foreach ($iterator as $fileInfo) {
             /** @var \SplFileInfo $fileInfo */
             if ($fileInfo->isFile() && $fileInfo->getExtension() === $extension) {
-                $files[] = $fileInfo->getRealPath();
+                yield $fileInfo->getRealPath();
             }
         }
-
-        return $files;
     }
 }
