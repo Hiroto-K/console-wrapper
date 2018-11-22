@@ -21,7 +21,7 @@ Wrapper class of [symfony/console](https://github.com/symfony/console)
 - [Uses](#uses)
     - [Arguments](#arguments)
     - [Options](#options)
-    - [Definition the global options](#definition-the-global-options)
+    - [Global options](#global-options)
     - [Output](#output)
     - [Auto add commands by PSR-4](#auto-add-commands-by-psr-4)
     - [Logger](#logger)
@@ -264,7 +264,7 @@ protected function handle()
 }
 ```
 
-### Definition the global options
+### Global options
 
 console-wrapper can easily set global options.
 
