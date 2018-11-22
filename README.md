@@ -20,12 +20,8 @@ Wrapper class of [symfony/console](https://github.com/symfony/console)
     - [Execute file](#example-execute-file)
 - [Uses](#uses)
     - [Arguments](#arguments)
-        - [Definition the arguments](#definition-the-arguments)
-        - [Access to arguments](#access-to-arguments)
     - [Options](#options)
-        - [Definition the options](#definition-the-options)
-        - [Access to options](#access-to-options)
-        - [Definition the global options](#definition-the-global-options)
+    - [Definition the global options](#definition-the-global-options)
     - [Output](#output)
     - [Auto add commands by PSR-4](#auto-add-commands-by-psr-4)
     - [Logger](#logger)
@@ -180,8 +176,6 @@ $application->run();
 
 ### Arguments
 
-#### Definition the arguments
-
 Definition the arguments, use the ``Command::commandArguments()`` method.
 
 Returned array will pass to the ``Command::addArgument()`` method.
@@ -205,9 +199,7 @@ protected function commandArguments()
 }
 ```
 
-#### Access to arguments
-
-console-wrapper is provided some proxy methods.
+For the access to arguments, console-wrapper is provided some proxy methods.
 
 ```php
 protected function handle()
@@ -224,8 +216,6 @@ protected function handle()
 ```
 
 ### Options
-
-#### Definition the options
 
 Definition the options, use the ``Command::commandOptions()`` method.
 
@@ -250,9 +240,7 @@ protected function commandOptions()
 }
 ```
 
-#### Access to options
-
-console-wrapper is provided some proxy methods.
+For the access to options, console-wrapper is provided some proxy methods.
 
 ```php
 protected function handle()
@@ -268,7 +256,7 @@ protected function handle()
 }
 ```
 
-#### Definition the global options
+### Definition the global options
 
 console-wrapper can easily set global options.
 
