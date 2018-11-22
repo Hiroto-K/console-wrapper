@@ -199,7 +199,11 @@ protected function commandArguments()
 }
 ```
 
-For the access to arguments, console-wrapper is provided some proxy methods.
+For the access to arguments, use the ``Command::argument()`` method.
+
+If you need to all of the arguments, use the ``Command::arguments()`` method
+
+To checks if the arguments exists, use the ``Command::hasArgument()`` method.
 
 ```php
 protected function handle()
@@ -240,7 +244,11 @@ protected function commandOptions()
 }
 ```
 
-For the access to options, console-wrapper is provided some proxy methods.
+For the access to options, use the ``Command::option()`` method.
+
+If you need to all of the options, use the ``Command::options()`` method
+
+To checks if the options exists, use the ``Command::hasOption()`` method.
 
 ```php
 protected function handle()
