@@ -25,7 +25,6 @@ Wrapper class of [symfony/console](https://github.com/symfony/console)
     - [Output](#output)
     - [Auto add commands by PSR-4](#auto-add-commands-by-psr-4)
     - [Logger](#logger)
-        - [Using Logger](#using-logger)
         - [Default logger](#default-logger)
         - [Override the default logger](#override-the-default-logger)
         - [Using logger in Command::setup](#using-logger-in-commandsetup)
@@ -331,8 +330,6 @@ $application->loadByPsr4("\ExampleApp\Commands", realpath(__DIR__.'/src/Commands
 ```
 
 ### Logger
-
-#### Using Logger
 
 Using the Logger in command class.
 
