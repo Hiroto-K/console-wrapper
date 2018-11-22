@@ -208,13 +208,13 @@ To checks if the arguments exists, use the ``Command::hasArgument()`` method.
 ```php
 protected function handle()
 {
-    // Get all arguments.
-    $allArguments = $this->arguments();
-
     // Get argument value.
     $userId = $this->argument('user-id');
 
-    // Check argument exists?
+    // Get all arguments.
+    $allArguments = $this->arguments();
+
+    // Checks whether a argument exists.
     $hasTaskArgument = $this->hasArgument('task');
 }
 ```
@@ -253,13 +253,13 @@ To checks if the options exists, use the ``Command::hasOption()`` method.
 ```php
 protected function handle()
 {
-    // Get all options.
-    $allOptions = $this->options();
-
     // Get option value.
     $name = $this->option('name');
 
-    // Check option exists?
+    // Get all options.
+    $allOptions = $this->options();
+
+    // Checks whether a option exists.
     $hasForceOption = $this->hasOption('force');
 }
 ```
