@@ -331,11 +331,10 @@ $application->loadByPsr4("\ExampleApp\Commands", realpath(__DIR__.'/src/Commands
 
 ### Logger
 
-Using the Logger in command class.
+console-wrapper can easily use the logger.
 
-Logger class must be implement the ``\Psr\Log\LoggerInterface`` interface.
-
-in execute file.
+Sets the logger instance in the execute file.
+Logger class must be implemented the ``\Psr\Log\LoggerInterface`` interface.
 
 ```php
 /**
@@ -344,12 +343,11 @@ in execute file.
 $application->setLogger($logger);
 ```
 
-in command class.
+In the command class, use the ``logger()`` method and use the logger.
 
 ```php
 protected function handle()
 {
-    // Using logger.
     $this->logger()->debug('Debug message');
     $this->logger()->error('Error message');
 }
@@ -357,7 +355,7 @@ protected function handle()
 
 #### Default logger
 
-If logger instance not sets in application, default using ``\Psr\Log\NullLogger`` class.
+If logger instance not sets in application, default using the ``\Psr\Log\NullLogger`` class.
 
 [\Psr\Log\NullLogger](https://github.com/php-fig/log/blob/master/Psr/Log/NullLogger.php)
 
@@ -372,7 +370,7 @@ protected function handle()
 #### Override the default logger
 
 If you want override the default logger, please override the ``Application::createDefaultLogger()`` method.
-Return instance must be implement the ``\Psr\Log\LoggerInterface`` interface.
+Return instance must be implemented the ``\Psr\Log\LoggerInterface`` interface.
 
 ```php
 // Use monolog in default logger
@@ -397,7 +395,7 @@ class Application extends WrapperApplication
 
 #### Using logger in Command::setup
 
-If using logger instance in ``Command::setup()`` method, **must be sets the logger instance before commands add**.
+If using the logger in ``Command::setup()`` method, **must be sets the logger instance before commands add**.
 
 ```php
 // Register logger instance
