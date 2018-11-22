@@ -88,7 +88,7 @@ class FindByPsr4
     /**
      * Get php files by $baseDir.
      *
-     * @return string[]
+     * @return \Generator
      */
     protected function findPhpFiles()
     {
