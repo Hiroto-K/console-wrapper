@@ -76,29 +76,6 @@ class FindByPsr4
     }
 
     /**
-     * Get command classes.
-     *
-     * @return string[]
-     */
-    protected function getCommandClasses()
-    {
-        $classes = [];
-
-        foreach ($this->findPhpFiles() as $file) {
-            $className = StringBuilder::make($file)
-                ->replace($this->targetDir, '')
-                ->replace('/', '\\')
-                ->replace('.php', '')
-                ->prepend($this->nameSpacePrefix)
-                ->toString();
-
-            $classes[] = $className;
-        }
-
-        return $classes;
-    }
-
-    /**
      * Get php files by $baseDir.
      *
      * @return \Generator
