@@ -88,21 +88,18 @@ class FindByPsr4
     /**
      * Get php files by $baseDir.
      *
-     * @return string[]
+     * @return \Generator
      */
     protected function findPhpFiles()
     {
         $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->targetDir));
-        $files = [];
         $extension = 'php';
 
         foreach ($iterator as $fileInfo) {
             /** @var \SplFileInfo $fileInfo */
             if ($fileInfo->isFile() && $fileInfo->getExtension() === $extension) {
-                $files[] = $fileInfo->getRealPath();
+                yield $fileInfo->getRealPath();
             }
         }
-
-        return $files;
     }
 }
