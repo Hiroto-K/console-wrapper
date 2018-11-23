@@ -59,7 +59,20 @@ class FindByPsr4
      */
     public function getClasses()
     {
-        return $this->getCommandClasses();
+        $classes = [];
+
+        foreach ($this->findPhpFiles() as $file) {
+            $className = StringBuilder::make($file)
+                ->replace($this->targetDir, '')
+                ->replace('/', '\\')
+                ->replace('.php', '')
+                ->prepend($this->nameSpacePrefix)
+                ->toString();
+
+            $classes[] = $className;
+        }
+
+        return $classes;
     }
 
     /**
