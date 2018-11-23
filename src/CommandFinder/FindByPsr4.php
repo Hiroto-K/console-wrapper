@@ -92,4 +92,21 @@ class FindByPsr4
             }
         }
     }
+
+    /**
+     * Convert to class name from file path.
+     *
+     * @param string $filePath
+     *
+     * @return string
+     */
+    protected function filePathToClassName(string $filePath)
+    {
+        return StringBuilder::make($filePath)
+            ->replace($this->targetDir, '')
+            ->replace('/', '\\')
+            ->replace('.php', '')
+            ->prepend($this->nameSpacePrefix)
+            ->toString();
+    }
 }
