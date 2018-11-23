@@ -61,8 +61,8 @@ class FindByPsr4
     {
         $classes = [];
 
-        foreach ($this->findPhpFiles() as $file) {
-            $classes[] = $this->filePathToClassName($file);
+        foreach ($this->findPhpFiles() as $filePath) {
+            $classes[] = $this->filePathToClassName($filePath);
         }
 
         return $classes;
