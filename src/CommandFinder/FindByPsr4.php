@@ -62,14 +62,7 @@ class FindByPsr4
         $classes = [];
 
         foreach ($this->findPhpFiles() as $file) {
-            $className = StringBuilder::make($file)
-                ->replace($this->targetDir, '')
-                ->replace('/', '\\')
-                ->replace('.php', '')
-                ->prepend($this->nameSpacePrefix)
-                ->toString();
-
-            $classes[] = $className;
+            $classes[] = $this->filePathToClassName($file);
         }
 
         return $classes;
