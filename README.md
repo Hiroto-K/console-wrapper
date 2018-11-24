@@ -487,7 +487,7 @@ protected function handle()
 
 customize tables, place see the ``\Symfony\Component\Console\Helper\Table`` class.
 
-- [Document of Table class](http://symfony.com/doc/current/components/console/helpers/table.html)
+- [Document of Table class](https://symfony.com/doc/current/components/console/helpers/table.html)
 
 ```php
 // Set the column width.
