@@ -497,6 +497,28 @@ $this
     ->render();
 ```
 
+#### Progress Bar
+
+```php
+protected function handle()
+{
+    $progressBar = $this->createProgressBar(100);
+
+    $progressBar->start();
+
+    $i = 0;
+    while ($i++ < 100) {
+        $progressBar->advance();
+    }
+
+    $progressBar->finish();
+}
+```
+
+customize tables, place see the ``\Symfony\Component\Console\Helper\ProgressBar`` class.
+
+- [Document of ProgressBar class](https://symfony.com/doc/current/components/console/helpers/progressbar.html)
+
 ## License
 
 [MIT License](https://github.com/hiroto-k/console-wrapper/blob/master/LICENSE "MIT License")
