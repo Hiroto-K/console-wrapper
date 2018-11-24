@@ -32,6 +32,7 @@ Wrapper class of [symfony/console](https://github.com/symfony/console)
         - [Confirm question](#confirm-question)
         - [Call other command](#call-other-command)
         - [Render tables](#render-tables)
+        - [Progress Bar](#progress-bar)
 
 ## Examples
 
