@@ -460,7 +460,7 @@ protected function handle()
 protected function handle()
 {
     // Only creates Table class instance.
-    $table = $this->table();
+    $table = $this->createTable();
 
     // Sets headers and rows
     $headers = ['name', 'location'];
@@ -468,7 +468,7 @@ protected function handle()
         ['Hoge', 'jp'],
         ['Foo', 'us'],
     ];
-    $table = $this->table($headers, $rows)
+    $table = $this->createTable($headers, $rows)
 
     // Render table
     $table->render();
