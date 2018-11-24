@@ -516,7 +516,7 @@ protected function handle()
 }
 ```
 
-customize tables, place see the ``\Symfony\Component\Console\Helper\ProgressBar`` class.
+customize progress bar, place see the ``\Symfony\Component\Console\Helper\ProgressBar`` class.
 
 - [Document of ProgressBar class](https://symfony.com/doc/current/components/console/helpers/progressbar.html)
 
