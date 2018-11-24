@@ -492,7 +492,7 @@ customize tables, place see the ``\Symfony\Component\Console\Helper\Table`` clas
 ```php
 // Set the column width.
 $this
-    ->table($headers, $rows)
+    ->createTable($headers, $rows)
     ->setColumnWidth(0, 10)
     ->render();
 ```
