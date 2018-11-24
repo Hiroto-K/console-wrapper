@@ -431,6 +431,16 @@ class CommandTest extends TestCase
         $this->assertNotCount(0, $this->getProperty($table, 'rows'));
     }
 
+    public function testCreateProgressBar()
+    {
+        $command = new ExampleCommand();
+        $this->setProperty($command, 'output', $this->createOutputMock());
+
+        $progressBar = $this->callMethod($command, 'createProgressBar', 100);
+
+        $this->assertInstanceOf(\Symfony\Component\Console\Helper\ProgressBar::class, $progressBar);
+    }
+
     public function testLogger()
     {
         $loggerMock = $this->createMock(\Psr\Log\LoggerInterface::class);
