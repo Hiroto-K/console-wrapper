@@ -390,30 +390,30 @@ class CommandTest extends TestCase
         $this->assertContains('command1', $output);
     }
 
-    public function testTable()
+    public function testCreateTable()
     {
         $command = new ExampleCommand();
         $this->setProperty($command, 'output', $this->createOutputMock());
 
-        $table = $this->callMethod($command, 'table');
+        $table = $this->callMethod($command, 'createTable');
 
         $this->assertInstanceOf(\Symfony\Component\Console\Helper\Table::class, $table);
     }
 
-    public function testTableSetHeaders()
+    public function testCreateTableSetHeaders()
     {
         $headers = ['name', 'age', 'loc'];
 
         $command = new ExampleCommand();
         $this->setProperty($command, 'output', $this->createOutputMock());
 
-        $table = $this->callMethod($command, 'table', $headers);
+        $table = $this->callMethod($command, 'createTable', $headers);
 
         $this->assertInstanceOf(\Symfony\Component\Console\Helper\Table::class, $table);
         $this->assertNotCount(0, $this->getProperty($table, 'headers'));
     }
 
-    public function testTableSetRows()
+    public function testCreateTableSetRows()
     {
         $headers = ['name', 'age', 'loc'];
         $rows = [
@@ -424,7 +424,7 @@ class CommandTest extends TestCase
         $command = new ExampleCommand();
         $this->setProperty($command, 'output', $this->createOutputMock());
 
-        $table = $this->callMethod($command, 'table', $headers, $rows);
+        $table = $this->callMethod($command, 'createTable', $headers, $rows);
 
         $this->assertInstanceOf(\Symfony\Component\Console\Helper\Table::class, $table);
         $this->assertNotCount(0, $this->getProperty($table, 'headers'));
