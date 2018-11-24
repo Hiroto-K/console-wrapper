@@ -325,11 +325,11 @@ abstract class Command extends SymfonyCommand implements LoggerAwareInterface
     /**
      * Create the ProgressBar instance.
      *
-     * @param int|null $max
+     * @param int $max
      *
      * @return \Symfony\Component\Console\Helper\ProgressBar
      */
-    protected function createProgressBar(?int $max = 0)
+    protected function createProgressBar(int $max)
     {
         return new ProgressBar($this->output, $max);
     }
