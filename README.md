@@ -12,40 +12,61 @@ Wrapper class of [symfony/console](https://github.com/symfony/console)
 
 ``composer require hiroto-k/console-wrapper:^1.0``
 
+## Documents
+
+- [Examples](#examples)
+    - [Command class](#example-command-class)
+    - [Application class](#example-application-class)
+    - [Execute file](#example-execute-file)
+- [Uses](#uses)
+    - [Arguments](#arguments)
+    - [Options](#options)
+    - [Global options](#global-options)
+    - [Output](#output)
+    - [Auto add commands by PSR-4](#auto-add-commands-by-psr-4)
+    - [Logger](#logger)
+        - [Default logger](#default-logger)
+        - [Override the default logger](#override-the-default-logger)
+        - [Using logger in Command::setup](#using-logger-in-commandsetup)
+    - [Helpers and Utils](#helpers-and-utils)
+        - [Confirm question](#confirm-question)
+        - [Call other command](#call-other-command)
+        - [Render tables](#render-tables)
+
 ## Examples
 
-### Command class
+### Example Command class
 
 ```php
 <?php
 
-namespace Example\Commands;
+namespace ExampleApp\Commands;
 
 use HirotoK\ConsoleWrapper\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class of hoge:foo command.
+ * Command class of "greeting" command.
  */
-class HogeFooCommand extends Command
+class GreetingCommand extends Command
 {
     /**
-     * Command name.
+     * Definition the command name.
      *
      * @var string
      */
-    protected $name = 'hoge:foo';
+    protected $name = 'greeting';
 
     /**
-     * Command description.
+     * Definition the command description.
      *
      * @var string
      */
-    protected $description = 'Example command class of console-wrapper';
+    protected $description = 'Example greeting command with console-wrapper';
 
     /**
-     * Configure command.
+     * Setup the command class.
      */
     protected function setup()
     {
@@ -54,55 +75,23 @@ class HogeFooCommand extends Command
     }
 
     /**
-     * Execute command.
+     * Execute the command.
      */
     protected function handle()
     {
-        // Display message.
-        $this->writeln('message');
+        $greet = $this->option('hi') ? 'Hi, ' : 'Hello, ';
 
-        // Display message with styles.
-        $this->info('info style');
-        $this->comment('comment style');
-        $this->question('question style');
-        $this->error('error style');
+        $name = $this->argument('first-name');
 
-
-        // Get all arguments.
-        $allArguments = $this->arguments();
-
-        // Get argument value.
-        $firstName = $this->argument('first-name');
-        $familyName = $this->argument('family-name');
-
-        // Check argument exists?
-        $hasFamilyName = $this->hasArgument('family-name');
-
-
-        // Get all options.
-        $allOptions = $this->options();
-
-        // Get option value.
-        $greeting = $this->option('greeting');
-
-        // Check option exists?
-        $hasGreeting = $this->hasOption('greeting');
-
-
-        // Example
-        if ($greeting) {
-            $this->comment(
-                sprintf(
-                    'Hello, %s %s',
-                    $firstName,
-                    $familyName
-                )
-            );
+        if ($this->hasArgument('family-name')) {
+            $name .= ' '.$this->argument('family-name');
         }
+
+        $this->writeln($greet.$name);
     }
 
     /**
-     * Define command arguments.
+     * Definition the command arguments.
      *
      * @see \Symfony\Component\Console\Command\Command::addArgument
      *
@@ -118,7 +107,7 @@ class HogeFooCommand extends Command
     }
 
     /**
-     * Define command options.
+     * Definition the command options.
      *
      * @see \Symfony\Component\Console\Command\Command::addOption
      *
@@ -128,18 +117,160 @@ class HogeFooCommand extends Command
     {
         return [
             // [$name, $shortcut = null, $mode = null, $description = '', $default = null]
-            ['greeting', 'g', InputOption::VALUE_NONE, 'Output greeting'],
+            ['hi', null, InputOption::VALUE_NONE, 'Use "Hi".'],
         ];
     }
 }
 ```
 
-### Application class
+### Example Application class
 
 ```php
 <?php
 
-namespace Example;
+namespace ExampleApp;
+
+use HirotoK\ConsoleWrapper\Application as WrapperApplication;
+use Symfony\Component\Console\Input\InputOption;
+
+/**
+ * Customize application class.
+ */
+class Application extends WrapperApplication
+{
+    /**
+     * Definition the global command options.
+     *
+     * @return array
+     */
+    protected function globalOptions()
+    {
+        return [
+            // [$name, $shortcut = null, $mode = null, $description = '', $default = null]
+            ['debug', null, InputOption::VALUE_NONE, 'Enable debug mode.'],
+            ['config', 'c', InputOption::VALUE_REQUIRED, 'Set path of config file.', 'path/to/default'],
+        ];
+    }
+}
+```
+
+### Example execute file
+
+```php
+<?php
+
+use ExampleApp\Application;
+use ExampleApp\Commands\GreetingCommand;
+
+$application = new Application();
+
+// Add command class.
+$application->add(new GreetingCommand());
+
+// Start the application.
+$application->run();
+```
+
+## Uses
+
+### Arguments
+
+Definition the arguments, use the ``Command::commandArguments()`` method.
+
+Returned array will pass to the ``Command::addArgument()`` method.
+See the documents for arguments of ``Command::addArgument()`` method.
+
+- [Using Command Arguments](https://symfony.com/doc/current/console/input.html#using-command-arguments)
+
+```php
+/**
+ * Definition the command arguments.
+ *
+ * @return array
+ */
+protected function commandArguments()
+{
+    return [
+        // [$name, $mode = null, $description = '', $default = null]
+        ['user-id', InputArgument::REQUIRED, 'User name (required)'],
+        ['task', InputArgument::OPTIONAL, 'Task name (optional)', 'default'],
+    ];
+}
+```
+
+For the access to arguments, use the ``Command::argument()`` method.
+
+If you need to all of the arguments, use the ``Command::arguments()`` method
+
+To checks if the arguments exists, use the ``Command::hasArgument()`` method.
+
+```php
+protected function handle()
+{
+    // Get argument value.
+    $userId = $this->argument('user-id');
+
+    // Get all arguments.
+    $allArguments = $this->arguments();
+
+    // Checks whether a argument exists.
+    $hasTaskArgument = $this->hasArgument('task');
+}
+```
+
+### Options
+
+Definition the options, use the ``Command::commandOptions()`` method.
+
+Returned array will pass to the ``Command::addOption()`` method.
+See the documents for arguments of ``Command::addOption()`` method.
+
+- [Using Command Options](https://symfony.com/doc/current/console/input.html#using-command-options)
+
+```php
+/**
+ * Definition the command options.
+ *
+ * @return array
+ */
+protected function commandOptions()
+{
+    return [
+        // [$name, $shortcut = null, $mode = null, $description = '', $default = null]
+        ['name', null, InputOption::VALUE_REQUIRED, 'User name.', 'default name'],
+        ['force', null, InputOption::VALUE_NONE, 'Force execute.'],
+    ];
+}
+```
+
+For the access to options, use the ``Command::option()`` method.
+
+If you need to all of the options, use the ``Command::options()`` method
+
+To checks if the options exists, use the ``Command::hasOption()`` method.
+
+```php
+protected function handle()
+{
+    // Get option value.
+    $name = $this->option('name');
+
+    // Get all options.
+    $allOptions = $this->options();
+
+    // Checks whether a option exists.
+    $hasForceOption = $this->hasOption('force');
+}
+```
+
+### Global options
+
+console-wrapper can easily set global options.
+
+```php
+<?php
+
+namespace ExampleApp;
 
 use HirotoK\ConsoleWrapper\Application as WrapperApplication;
 use Symfony\Component\Console\Input\InputOption;
@@ -147,55 +278,64 @@ use Symfony\Component\Console\Input\InputOption;
 class Application extends WrapperApplication
 {
     /**
-     * Define global command options.
-     *  
+     * Definition the global command options.
+     *
      * @return array
      */
     protected function globalOptions()
     {
         return [
             // [$name, $shortcut = null, $mode = null, $description = '', $default = null]
-            ['config', 'c', InputOption::VALUE_REQUIRED, 'Set config file', "path/to/default"],
+            ['debug', null, InputOption::VALUE_NONE, 'Enable debug mode.'],
+            ['config', 'c', InputOption::VALUE_REQUIRED, 'Set path of config file.', 'path/to/default'],
         ];
     }
 }
 ```
 
-### Execute file
+### Output
+
+console-wrapper is provided some output methods.
 
 ```php
-<?php
+protected function handle()
+{
+    // Display normal message.
+    $this->writeln('message');
+    $this->writeln([
+        'multi',
+        'line',
+        'message',
+    ]);
 
-use Example\Application;
-use Example\Commands\HogeFooCommand;
-
-$application = new Application();
-
-// Add command.
-$application->add(new HogeFooCommand());
-
-// Start application.
-$application->run();
+    // Display message with styles.
+    $this->info('info style');
+    $this->comment('comment style');
+    $this->question('question style');
+    $this->error('error style');
+}
 ```
 
 ### Auto add commands by PSR-4
 
-If project using PSR-4, auto load all commands by ``loadByPsr4`` method.
+If project using PSR-4, auto load all commands by ``Application::loadByPsr4()`` method.
 
 ```php
 /**
- * Auto load commands by PSR-4.
+ * Auto add commands by PSR-4.
  * 
  * loadByPsr4(string $nameSpacePrefix, string $targetDir)
  */
-$application->loadByPsr4("\Example\Commands", realpath(__DIR__.'/src/Commands'));
+$application->loadByPsr4("\ExampleApp\Commands", realpath(__DIR__.'/src/Commands'));
 ```
 
-### Using Logger
+### Logger
 
-Set logger instance in execute file. Logger class must be implement the ``\Psr\Log\LoggerInterface`` interface.
+console-wrapper can easily use the logger.
 
-in execute file
+Sets the logger instance in the execute file.
+Logger class must be implemented the ``\Psr\Log\LoggerInterface`` interface.
+
 ```php
 /**
  * Set logger instance to application and command class.
@@ -203,18 +343,21 @@ in execute file
 $application->setLogger($logger);
 ```
 
-in command class
+In the command class, use the ``logger()`` method and use the logger.
+
 ```php
 protected function handle()
 {
-    // Using logger.
-    $this->logger();
+    $this->logger()->debug('Debug message');
+    $this->logger()->error('Error message');
 }
 ```
 
 #### Default logger
 
-Logger instance not sets in application, default using ``\Psr\Log\NullLogger`` class.
+If logger instance not sets in application, default using the ``\Psr\Log\NullLogger`` class.
+
+[\Psr\Log\NullLogger](https://github.com/php-fig/log/blob/master/Psr/Log/NullLogger.php)
 
 ```php
 protected function handle()
@@ -224,12 +367,16 @@ protected function handle()
 }
 ```
 
-#### Override default logger
+#### Override the default logger
 
-Override ``Application::createDefaultLogger`` method. Return instance must be implement the ``\Psr\Log\LoggerInterface`` interface.
+If you want override the default logger, please override the ``Application::createDefaultLogger()`` method.
+Return instance must be implemented the ``\Psr\Log\LoggerInterface`` interface.
 
 ```php
+// Use monolog in default logger
+
 use HirotoK\ConsoleWrapper\Application as WrapperApplication;
+use Monolog\Logger;
 
 class Application extends WrapperApplication
 {
@@ -237,7 +384,7 @@ class Application extends WrapperApplication
      * Override default logger instance.
      * Return instance must be implement the \Psr\Log\LoggerInterface
      * 
-     * @return \Psr\Log\LoggerInterface
+     * @return \Monolog\Logger
      */
     protected function createDefaultLogger()
     {
@@ -248,18 +395,20 @@ class Application extends WrapperApplication
 
 #### Using logger in Command::setup
 
-If using logger instance in ``Command::setup()`` method, **must be sets the logger instance before commands add**.
+If using the logger in ``Command::setup()`` method, **must be sets the logger instance before commands add**.
 
 ```php
 // Register logger instance
 $application->setLogger($logger);
 
 // Add commands
-$application->add(new HogeFooCommand());
-$application->loadByPsr4("\Example\Commands", realpath(__DIR__.'/src/Commands'));
+$application->add(new GreetingCommand());
+$application->loadByPsr4("\ExampleApp\Commands", realpath(__DIR__.'/src/Commands'));
 ```
 
-### Confirm question
+### Helpers and Utils
+
+#### Confirm question
 
 Simple confirmation. Default returns ``true``.
 
@@ -283,15 +432,15 @@ protected function handle()
 }
 ```
 
-### Call other commands
+#### Call other command
 
 Call other command in command class.
 
 ```php
 protected function handle()
 {
-    // Call "hoge:ex" command
-    $this->callCommand('hoge:ex');
+    // Call the "other-command-name" command
+    $this->callCommand('other-command-name');
 }
 ```
 
@@ -300,12 +449,12 @@ with parameters
 ```php
 protected function handle()
 {
-    // Call "hoge:ex" command, with name parameter
-    $this->callCommand('hoge:ex', ['name' => 'example']);
+    // Call the "other-command-name" command, with name parameter
+    $this->callCommand('other-command-name', ['name' => 'example']);
 }
 ```
 
-### Render tables
+#### Render tables
 
 ```php
 protected function handle()
