@@ -303,6 +303,22 @@ abstract class Command extends SymfonyCommand implements LoggerAwareInterface
     /**
      * Create table.
      *
+     * @deprecated "table" method is deprecated in "1.2.0", delete in "2.0.0"
+     * @deprecated use the "createTable" method
+     *
+     * @param array|null $headers
+     * @param array|null $rows
+     *
+     * @return \Symfony\Component\Console\Helper\Table
+     */
+    protected function table(?array $headers = null, ?array $rows = null)
+    {
+        return $this->createTable($headers, $rows);
+    }
+
+    /**
+     * Create table.
+     *
      * @param array|null $headers
      * @param array|null $rows
      *
