@@ -26,8 +26,9 @@ class FindByPsr4Test extends TestCase
         $finder = new FindByPsr4('\HirotoK\ConsoleWrapper\Tests', realpath(__DIR__.'/../'));
 
         $classes = $finder->getClasses();
-        $this->assertTrue(in_array('\HirotoK\ConsoleWrapper\Tests\ApplicationTest', $classes, true));
-        $this->assertTrue(in_array('\HirotoK\ConsoleWrapper\Tests\CommandFinder\FindByPsr4Test', $classes, true));
+        $this->assertContainsOnly('string', $classes, true);
+        $this->assertContains('\HirotoK\ConsoleWrapper\Tests\ApplicationTest', $classes);
+        $this->assertContains('\HirotoK\ConsoleWrapper\Tests\CommandFinder\FindByPsr4Test', $classes);
     }
 
     public function testGetClassesNameSpacePrefix()
@@ -35,7 +36,8 @@ class FindByPsr4Test extends TestCase
         $finder = new FindByPsr4('HirotoK\ConsoleWrapper\Tests', realpath(__DIR__.'/../'));
 
         $classes = $finder->getClasses();
-        $this->assertTrue(in_array('\HirotoK\ConsoleWrapper\Tests\ApplicationTest', $classes, true));
-        $this->assertTrue(in_array('\HirotoK\ConsoleWrapper\Tests\CommandFinder\FindByPsr4Test', $classes, true));
+        $this->assertContainsOnly('string', $classes, true);
+        $this->assertContains('\HirotoK\ConsoleWrapper\Tests\ApplicationTest', $classes);
+        $this->assertContains('\HirotoK\ConsoleWrapper\Tests\CommandFinder\FindByPsr4Test', $classes);
     }
 }
