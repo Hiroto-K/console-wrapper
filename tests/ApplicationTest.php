@@ -25,6 +25,13 @@ use Symfony\Component\Console\Input\InputOption;
  */
 class ApplicationTest extends TestCase
 {
+    public function testLoadByPsr4()
+    {
+        $application = new Application();
+        $returnValue = $application->loadByPsr4('HirotoK\ConsoleWrapper\Tests\Examples\Commands', realpath(__DIR__.'/Examples/Commands'));
+        $this->assertNull($returnValue);
+    }
+
     public function testLoggerNotSetsReturnNullLogger()
     {
         $application = new Application();

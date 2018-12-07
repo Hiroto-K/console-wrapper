@@ -1,23 +1,55 @@
-language : php
-php :
-  - "7.1"
-  - "7.2"
+language: php
 
-before_script :
-  - composer self-update
-  - composer install
+git:
+  depth: 1
 
-script :
-  - mkdir -p build/logs
-  - ./vendor/bin/phpunit
-
-after_success:
-  - travis_retry php ./vendor/bin/php-coveralls -v
-
-cache :
-  directories :
+cache:
+  directories:
     - vendor
 
-notifications :
-  on_success : never
-  on_failure : never
+notifications:
+  email: false
+
+before_script:
+  - travis_retry composer self-update
+
+env:
+  global:
+    - DEFAULT_COMPOSER_INSTALL_FLAGS="--no-interaction --no-progress"
+
+jobs:
+  include:
+    -
+      stage: Test
+      php: "7.1"
+      before_script:
+        - composer install $DEFAULT_COMPOSER_INSTALL_FLAGS
+      script:
+        - ./vendor/bin/phpunit
+
+    -
+      stage: Test
+      php: "7.2"
+      before_script:
+        - composer install $DEFAULT_COMPOSER_INSTALL_FLAGS
+      script:
+        - ./vendor/bin/phpunit
+
+    -
+      stage: Test
+      php: "7.3"
+      before_script:
+        - composer install $DEFAULT_COMPOSER_INSTALL_FLAGS --ignore-platform-reqs
+      script:
+        - ./vendor/bin/phpunit
+
+    -
+      stage: Test
+      php: "nightly"
+      before_script:
+        - composer install $DEFAULT_COMPOSER_INSTALL_FLAGS --ignore-platform-reqs
+      script:
+        - ./vendor/bin/phpunit
+
+  allow_failures:
+    - php: nightly

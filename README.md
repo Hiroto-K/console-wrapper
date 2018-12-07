@@ -2,7 +2,6 @@
 
 [![Build Status](https://travis-ci.org/hiroto-k/console-wrapper.svg?branch=master)](https://travis-ci.org/hiroto-k/console-wrapper)
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/hiroto-k/console-wrapper.svg)](https://packagist.org/packages/hiroto-k/console-wrapper)
-[![Coverage Status](https://coveralls.io/repos/github/hiroto-k/console-wrapper/badge.svg?branch=master)](https://coveralls.io/github/hiroto-k/console-wrapper?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ba59e655bdc9c4410966/maintainability)](https://codeclimate.com/github/hiroto-k/console-wrapper/maintainability)
 [![License](https://img.shields.io/github/license/hiroto-k/console-wrapper.svg)](https://github.com/hiroto-k/console-wrapper/blob/master/LICENSE)
 
@@ -32,6 +31,7 @@ Wrapper class of [symfony/console](https://github.com/symfony/console)
         - [Confirm question](#confirm-question)
         - [Call other command](#call-other-command)
         - [Render tables](#render-tables)
+        - [Progress Bar](#progress-bar)
 
 ## Examples
 
@@ -487,7 +487,7 @@ protected function handle()
 
 customize tables, place see the ``\Symfony\Component\Console\Helper\Table`` class.
 
-- [Document of Table class](http://symfony.com/doc/current/components/console/helpers/table.html)
+- [Document of Table class](https://symfony.com/doc/current/components/console/helpers/table.html)
 
 ```php
 // Set the column width.
@@ -496,6 +496,28 @@ $this
     ->setColumnWidth(0, 10)
     ->render();
 ```
+
+#### Progress Bar
+
+```php
+protected function handle()
+{
+    $progressBar = $this->createProgressBar(100);
+
+    $progressBar->start();
+
+    $i = 0;
+    while ($i++ < 100) {
+        $progressBar->advance();
+    }
+
+    $progressBar->finish();
+}
+```
+
+customize progress bar, place see the ``\Symfony\Component\Console\Helper\ProgressBar`` class.
+
+- [Document of ProgressBar class](https://symfony.com/doc/current/components/console/helpers/progressbar.html)
 
 ## License
 

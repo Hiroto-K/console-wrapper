@@ -11,7 +11,6 @@
 
 namespace HirotoK\ConsoleWrapper\CommandFinder;
 
-use HirotoK\StringBuilder\StringBuilder;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
@@ -95,11 +94,9 @@ class FindByPsr4
      */
     protected function filePathToClassName(string $filePath)
     {
-        return StringBuilder::make($filePath)
-            ->replace($this->targetDir, '')
-            ->replace('/', '\\')
-            ->replace('.php', '')
-            ->prepend($this->nameSpacePrefix)
-            ->toString();
+        $className = str_replace([$this->targetDir, '.php'], '', $filePath);
+        $className = str_replace('/', '\\', $className);
+
+        return $this->nameSpacePrefix.$className;
     }
 }
