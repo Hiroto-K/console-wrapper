@@ -482,7 +482,7 @@ class CommandTest extends TestCase
         $this->assertInstanceOf(\Symfony\Component\Console\Helper\ProgressBar::class, $progressBar);
     }
 
-  public function testLogger()
+    public function testLogger()
     {
         $loggerMock = $this->createMock(\Psr\Log\LoggerInterface::class);
         $command = new ExampleCommand();
