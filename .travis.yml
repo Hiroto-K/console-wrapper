@@ -8,8 +8,7 @@ cache:
     - vendor
 
 notifications:
-  on_success: never
-  on_failure: never
+  email: false
   webhooks: https://coveralls.io/webhook
 
 before_script:
