@@ -31,6 +31,7 @@ Wrapper class of [symfony/console](https://github.com/symfony/console)
         - [Confirm question](#confirm-question)
         - [Call other command](#call-other-command)
         - [Render tables](#render-tables)
+        - [Progress Bar](#progress-bar)
 
 ## Examples
 
@@ -495,6 +496,28 @@ $this
     ->setColumnWidth(0, 10)
     ->render();
 ```
+
+#### Progress Bar
+
+```php
+protected function handle()
+{
+    $progressBar = $this->createProgressBar(100);
+
+    $progressBar->start();
+
+    $i = 0;
+    while ($i++ < 100) {
+        $progressBar->advance();
+    }
+
+    $progressBar->finish();
+}
+```
+
+customize progress bar, place see the ``\Symfony\Component\Console\Helper\ProgressBar`` class.
+
+- [Document of ProgressBar class](https://symfony.com/doc/current/components/console/helpers/progressbar.html)
 
 ## License
 
