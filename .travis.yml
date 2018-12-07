@@ -1,23 +1,23 @@
-language : php
-php :
+language: php
+php:
   - "7.1"
   - "7.2"
 
-before_script :
+before_script:
   - composer self-update
   - composer install
 
-script :
+script:
   - mkdir -p build/logs
   - ./vendor/bin/phpunit
 
 after_success:
   - travis_retry php ./vendor/bin/php-coveralls -v
 
-cache :
-  directories :
+cache:
+  directories:
     - vendor
 
-notifications :
-  on_success : never
-  on_failure : never
+notifications:
+  on_success: never
+  on_failure: never
