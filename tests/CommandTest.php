@@ -431,6 +431,47 @@ class CommandTest extends TestCase
         $this->assertNotCount(0, $this->getProperty($table, 'rows'));
     }
 
+    public function testCreateTable()
+    {
+        $command = new ExampleCommand();
+        $this->setProperty($command, 'output', $this->createOutputMock());
+
+        $table = $this->callMethod($command, 'createTable');
+
+        $this->assertInstanceOf(\Symfony\Component\Console\Helper\Table::class, $table);
+    }
+
+    public function testCreateTableSetHeaders()
+    {
+        $headers = ['name', 'age', 'loc'];
+
+        $command = new ExampleCommand();
+        $this->setProperty($command, 'output', $this->createOutputMock());
+
+        $table = $this->callMethod($command, 'createTable', $headers);
+
+        $this->assertInstanceOf(\Symfony\Component\Console\Helper\Table::class, $table);
+        $this->assertNotCount(0, $this->getProperty($table, 'headers'));
+    }
+
+    public function testCreateTableSetRows()
+    {
+        $headers = ['name', 'age', 'loc'];
+        $rows = [
+            ['a', '10', 'jp'],
+            ['b', '20', 'us'],
+        ];
+
+        $command = new ExampleCommand();
+        $this->setProperty($command, 'output', $this->createOutputMock());
+
+        $table = $this->callMethod($command, 'createTable', $headers, $rows);
+
+        $this->assertInstanceOf(\Symfony\Component\Console\Helper\Table::class, $table);
+        $this->assertNotCount(0, $this->getProperty($table, 'headers'));
+        $this->assertNotCount(0, $this->getProperty($table, 'rows'));
+    }
+
     public function testCreateProgressBar()
     {
         $command = new ExampleCommand();
@@ -441,7 +482,7 @@ class CommandTest extends TestCase
         $this->assertInstanceOf(\Symfony\Component\Console\Helper\ProgressBar::class, $progressBar);
     }
 
-    public function testLogger()
+  public function testLogger()
     {
         $loggerMock = $this->createMock(\Psr\Log\LoggerInterface::class);
         $command = new ExampleCommand();

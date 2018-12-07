@@ -460,7 +460,7 @@ protected function handle()
 protected function handle()
 {
     // Only creates Table class instance.
-    $table = $this->table();
+    $table = $this->createTable();
 
     // Sets headers and rows
     $headers = ['name', 'location'];
@@ -468,7 +468,7 @@ protected function handle()
         ['Hoge', 'jp'],
         ['Foo', 'us'],
     ];
-    $table = $this->table($headers, $rows)
+    $table = $this->createTable($headers, $rows)
 
     // Render table
     $table->render();
@@ -492,7 +492,7 @@ customize tables, place see the ``\Symfony\Component\Console\Helper\Table`` clas
 ```php
 // Set the column width.
 $this
-    ->table($headers, $rows)
+    ->createTable($headers, $rows)
     ->setColumnWidth(0, 10)
     ->render();
 ```
