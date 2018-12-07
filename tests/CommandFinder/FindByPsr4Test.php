@@ -29,6 +29,7 @@ class FindByPsr4Test extends TestCase
         $this->assertContainsOnly('string', $classes, true);
         $this->assertContains('\HirotoK\ConsoleWrapper\Tests\ApplicationTest', $classes);
         $this->assertContains('\HirotoK\ConsoleWrapper\Tests\CommandFinder\FindByPsr4Test', $classes);
+        $this->assertContains('\HirotoK\ConsoleWrapper\Tests\Examples\ExampleLogger', $classes);
     }
 
     public function testGetClassesNameSpacePrefix()
@@ -39,5 +40,6 @@ class FindByPsr4Test extends TestCase
         $this->assertContainsOnly('string', $classes, true);
         $this->assertContains('\HirotoK\ConsoleWrapper\Tests\ApplicationTest', $classes);
         $this->assertContains('\HirotoK\ConsoleWrapper\Tests\CommandFinder\FindByPsr4Test', $classes);
+        $this->assertContains('\HirotoK\ConsoleWrapper\Tests\Examples\ExampleLogger', $classes);
     }
 }
