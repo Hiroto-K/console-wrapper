@@ -9,13 +9,9 @@ cache:
 
 notifications:
   email: false
-  webhooks: https://coveralls.io/webhook
 
 before_script:
   - travis_retry composer self-update
-
-after_success:
-  - travis_retry php ./vendor/bin/php-coveralls -v
 
 env:
   global:
