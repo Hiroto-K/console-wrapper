@@ -3,6 +3,14 @@ php:
   - "7.1"
   - "7.2"
 
+cache:
+  directories:
+    - vendor
+
+notifications:
+  on_success: never
+  on_failure: never
+
 before_script:
   - composer self-update
   - composer install
@@ -13,11 +21,3 @@ script:
 
 after_success:
   - travis_retry php ./vendor/bin/php-coveralls -v
-
-cache:
-  directories:
-    - vendor
-
-notifications:
-  on_success: never
-  on_failure: never
