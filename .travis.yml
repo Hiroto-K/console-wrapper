@@ -11,13 +11,17 @@ notifications:
 before_script:
   - travis_retry composer self-update
 
+env:
+  global:
+    - DEFAULT_COMPOSER_INSTALL_FLAGS="--no-interaction --no-progress"
+
 jobs:
   include:
     -
       stage: Test
       php: "7.1"
       before_script:
-        - composer install
+        - composer install $DEFAULT_COMPOSER_INSTALL_FLAGS
       script:
         - ./vendor/bin/phpunit
 
@@ -25,7 +29,7 @@ jobs:
       stage: Test
       php: "7.2"
       before_script:
-        - composer install
+        - composer install $DEFAULT_COMPOSER_INSTALL_FLAGS
       script:
         - ./vendor/bin/phpunit
       after_success:
