@@ -29,5 +29,4 @@ jobs:
       script:
         - ./vendor/bin/phpunit
       after_success:
-        - mkdir -p build/logs
         - travis_retry php ./vendor/bin/php-coveralls -v
