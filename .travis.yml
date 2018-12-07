@@ -10,6 +10,7 @@ cache:
 notifications:
   on_success: never
   on_failure: never
+  webhooks: https://coveralls.io/webhook
 
 before_script:
   - travis_retry composer self-update
