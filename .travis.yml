@@ -50,3 +50,6 @@ jobs:
         - composer install $DEFAULT_COMPOSER_INSTALL_FLAGS --ignore-platform-reqs
       script:
         - ./vendor/bin/phpunit
+
+  allow_failures:
+    - php: nightly
