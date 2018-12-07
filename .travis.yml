@@ -14,6 +14,9 @@ notifications:
 before_script:
   - travis_retry composer self-update
 
+after_success:
+  - travis_retry php ./vendor/bin/php-coveralls -v
+
 env:
   global:
     - DEFAULT_COMPOSER_INSTALL_FLAGS="--no-interaction --no-progress"
@@ -35,8 +38,6 @@ jobs:
         - composer install $DEFAULT_COMPOSER_INSTALL_FLAGS
       script:
         - ./vendor/bin/phpunit
-      after_success:
-        - travis_retry php ./vendor/bin/php-coveralls -v
 
     -
       stage: Test
