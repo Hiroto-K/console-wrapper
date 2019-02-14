@@ -39,7 +39,7 @@ jobs:
       stage: Test
       php: "7.3"
       before_script:
-        - composer install $DEFAULT_COMPOSER_INSTALL_FLAGS --ignore-platform-reqs
+        - composer install $DEFAULT_COMPOSER_INSTALL_FLAGS
       script:
         - ./vendor/bin/phpunit
 
