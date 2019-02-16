@@ -351,6 +351,16 @@ abstract class Command extends SymfonyCommand implements LoggerAwareInterface
     }
 
     /**
+     * Get the question helper instance.
+     *
+     * @return \Symfony\Component\Console\Helper\QuestionHelper
+     */
+    protected function getQuestionHelper()
+    {
+        return $this->getHelper('question');
+    }
+
+    /**
      * Return logger instance.
      *
      * @return \Psr\Log\LoggerInterface
