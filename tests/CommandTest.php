@@ -485,6 +485,7 @@ class CommandTest extends TestCase
     public function testGetQuestionHelper()
     {
         $command = new ExampleCommand();
+        $command->setApplication(new Application());
         $this->setProperty($command, 'output', $this->createOutputMock());
 
         $questionHelper = $this->callMethod($command, 'getQuestionHelper');
@@ -495,6 +496,7 @@ class CommandTest extends TestCase
     public function testGetProcessHelper()
     {
         $command = new ExampleCommand();
+        $command->setApplication(new Application());
         $this->setProperty($command, 'output', $this->createOutputMock());
 
         $processHelper = $this->callMethod($command, 'getProcessHelper');
