@@ -482,6 +482,26 @@ class CommandTest extends TestCase
         $this->assertInstanceOf(\Symfony\Component\Console\Helper\ProgressBar::class, $progressBar);
     }
 
+    public function testGetQuestionHelper()
+    {
+        $command = new ExampleCommand();
+        $this->setProperty($command, 'output', $this->createOutputMock());
+
+        $questionHelper = $this->callMethod($command, 'getQuestionHelper');
+
+        $this->assertInstanceOf(\Symfony\Component\Console\Helper\QuestionHelper::class, $questionHelper);
+    }
+
+    public function testGetProcessHelper()
+    {
+        $command = new ExampleCommand();
+        $this->setProperty($command, 'output', $this->createOutputMock());
+
+        $processHelper = $this->callMethod($command, 'getProcessHelper');
+
+        $this->assertInstanceOf(\Symfony\Component\Console\Helper\ProcessHelper::class, $processHelper);
+    }
+
     public function testLogger()
     {
         $loggerMock = $this->createMock(\Psr\Log\LoggerInterface::class);
