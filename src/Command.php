@@ -3,7 +3,7 @@
 /*
  * This file is part of console-wrapper.
  *
- * (c) Hiroto Kitazawa <hiro.yo.yo1610@gmail.com>
+ * (c) Hiroto Kitazawa <hiroto.ktzw@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
