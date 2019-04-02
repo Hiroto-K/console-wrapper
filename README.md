@@ -32,6 +32,7 @@ Wrapper class of [symfony/console](https://github.com/symfony/console)
         - [Call other command](#call-other-command)
         - [Render tables](#render-tables)
         - [Progress Bar](#progress-bar)
+        - [Gets a helper instance](#gets-a-helper-instance)
 
 ## Examples
 
@@ -518,6 +519,19 @@ protected function handle()
 customize progress bar, place see the ``\Symfony\Component\Console\Helper\ProgressBar`` class.
 
 - [Document of ProgressBar class](https://symfony.com/doc/current/components/console/helpers/progressbar.html)
+
+#### Gets a helper instance
+
+```php
+protected function handle()
+{
+    // Get the question helper instance
+    $this->getQuestionHelper();
+
+    // Get the process helper instance.
+    $this->getProcessHelper();
+}
+```
 
 ## License
 
